@@ -16,4 +16,12 @@ app.use(cookieParser());
 
 
 
+// user routing for login ,  signup , logout 
+import userRouter from "./routes/user.router.js"
+app.use("/api/user", userRouter)
+
+// product routing for creating and fetching products data
+import productRouter from "./routes/product.router.js"
+app.use("api/product",productRouter)
+
 export {app}
