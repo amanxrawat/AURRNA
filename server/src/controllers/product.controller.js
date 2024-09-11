@@ -28,7 +28,7 @@ const productReview = asyncHandler(async(req,res)=>{
 
     
     if(!review){
-        throw new ApiError(500,"something went wrong while uploading the user review || product-review-controller")
+        throw new ApiError(500,"|| something went wrong while uploading the user review || product-review-controller")
     }
     
     const product = await Product.findById(req.params.product_id);
@@ -50,7 +50,7 @@ const productReview = asyncHandler(async(req,res)=>{
     await product.save()
 
     return res.status(200)
-    .json(new ApiResponse(200,review , " user review created successfully "));
+    .json(new ApiResponse(200,review , "|| user review created successfully ||"));
 
 })
 
@@ -96,11 +96,11 @@ const createProduct = asyncHandler(async(req,res)=>{
 
     
         res.status(200)
-        .json(new ApiResponse(200,newProduct , " the product has been created successfully "))
+        .json(new ApiResponse(200,newProduct , "|| the product has been created successfully ||"))
         
     } catch (error) {
         console.error(error);
-        res.status(500).json({ message: 'Server error, could not create product' });
+        res.status(500).json({ message: '|| Server error, could not create product ||' });
     }
 })
 
@@ -157,7 +157,7 @@ const updateProduct = asyncHandler(async (req, res) => {
             .json(new ApiResponse(200, product, "|| Product updated successfully ||"));
     } catch (error) {
         console.error(error);
-        res.status(500).json({ message: 'Server error, could not update product' });
+        res.status(500).json({ message: ' || Server error, could not update product ||' });
     }
 });
 
@@ -202,7 +202,7 @@ const getAllProducts = asyncHandler(async (req, res) => {
         });
     } catch (error) {
         console.error(error);
-        throw new ApiError(400,'|| Server error, could not retrieve products ||'+error.message)
+        throw new ApiError(400,'|| Server error, could not retrieve products ||')
     }
 });
 
@@ -223,11 +223,83 @@ const getSingleProduct = asyncHandler(async(req,res)=>{
 
     }catch(error){
         console.error(error);
-        throw new ApiError(500," ||server error || getSingleProduct controller || "+error.message)
+        throw new ApiError(500," ||server error || getSingleProduct controller || ")
     }
 })
 
+const getProductsByCategory = asyncHandler(async (req, res) => {
+    try {
+        const { category } = req.params;
+
+        const products = await Product.aggregate([
+            {
+                $match: {
+                    category: { $in: [category] }
+                }
+            },
+            {
+                $sort: { createdAt: -1 } // Sort by most recent
+            }
+        ]);
+
+        if (products.length === 0) {
+            return res.status(404).json(new ApiResponse(404,[],
+             "|| No products found for the given category ||"
+        ));
+        }
+
+        return res.status(200).json(new ApiResponse(
+            200,
+            products,
+            " || list of product that match the category || "
+        ));
+    } catch (error) {
+        console.error(error);
+        throw new ApiError(500,"|| server error || ")
+    }
+});
 
 
+const getProductsByTag = asyncHandler(async (req, res) => {
+    try {
+        const { tag } = req.params;
 
-export { productReview, createProduct , updateProduct , deleteProduct , getAllProducts , getSingleProduct} 
+        const products = await Product.aggregate([
+            {
+                $match: {
+                    tags: { $in: [tag] }
+                }
+            },
+            {
+                $sort: { createdAt: -1 } // Sort by most recent
+            }
+        ]);
+
+        if (products.length === 0) {
+            return res.status(404).json(new ApiResponse(404,[],
+             "|| No products found for the given category ||"
+        ));
+        }
+
+        return res.status(200).json(new ApiResponse(
+            200,
+            products,
+            " || list of product that match the category || "
+        ));
+    } catch (error) {
+        console.error(error);
+        throw new ApiError(500,"|| server error || ")
+    }
+});
+
+
+export { 
+    productReview,
+        createProduct,
+        updateProduct,
+        deleteProduct,
+        getAllProducts,
+        getSingleProduct,
+        getProductsByCategory,
+        getProductsByTag
+    } 
