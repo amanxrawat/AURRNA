@@ -71,8 +71,66 @@ const removeProductFromCart = asyncHandler(async(req,res)=>{
 
 })
 
+const getUserCart = asyncHandler(async(req,res)=>{
+    try {
+        const user_id = req.user._id
+    
+        if(!user_id){
+            throw new ApiError(500 , "|| the userid could not be accessed  ||")
+        }
+    
+        const userCart = await  Cart.aggregate([
+            {
+                $match : { user: mongoose.Types.ObjectId(user_id) }
+    
+            },
+            {
+                $lookup: { // Optionally populate the product details for each cart item
+                    from: 'products',
+                    localField: 'items.productId',
+                    foreignField: '_id',
+                    as: 'productDetails'
+                }
+            }
+        ])
 
+        if (!userCart || userCart.length === 0) {
+            return res.status(404).json(new ApiResponse(404, null, "|| No cart found for the user ||"));
+        }
+    
+        return res.status(200)
+        .json(new ApiResponse(200,userCart , "|| user cart fectch succefully  ||"))
+    } catch (error) {
+        console.log(error);
+        throw new ApiError(400,"|| cannot get the users cart detials ||")
+    }
+})
 
-export {addToCart, removeProductFromCart}   
+const clearUserCart = asyncHandler(async(req , res )=>{
+    try {
+        const user_id = req.user._id;
+    
+        if(!user_id){
+            throw new ApiError(500 , "|| the userid could not be accessed  ||")
+        }
+    
+        const deletedItems = await Cart.deleteOne({ user: user_id });
+        
+        if (deletedItems.deletedCount === 0) {
+            return res.status(404)
+                .json(new ApiResponse(404, null, "|| No cart found for the user ||"));
+        }
+    
+        return res.status(200)
+            .json(new ApiResponse(200,deletedItems , "|| user cart cleared succefully  ||"))
+    
+    } catch (error) {
+        console.log(error);
+        throw new ApiError(400,"|| cannot clear the uer cart ||")
+    }
+
+})
+
+export {addToCart, removeProductFromCart, getUserCart , clearUserCart}   
 
 
