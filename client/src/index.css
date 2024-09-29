@@ -12,9 +12,7 @@
   .btn-text {
     @apply bg-transparent text-black;
   }
-  .logo-ticker-image {
-    @apply h-8 w-auto;
-  }
+
   .tag {
     @apply inline-flex rounded-lg border border-[#222222]/10 px-3 py-1 text-sm tracking-tight;
   }
@@ -30,7 +28,13 @@
   .section-heading {
     @apply mx-auto max-w-[480px];
   }
-.card {
+  .card {
     @apply w-full max-w-xs rounded-3xl border border-[#F1F1F1] p-10 shadow-[0_7px_14px_#EAEAEA];
+  }
+  .icon {
+    @apply mx-auto h-16 scale-[2] text-orange
+  }
+  .icon-text {
+    @apply text-center max-w-[300px] text-white pb-5
   }
 }

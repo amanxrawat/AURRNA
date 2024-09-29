@@ -9,10 +9,11 @@ export default {
       },
 
       colors: {
-        yellow: "#F8F7F2",
+        yellow: "#FFFFB9",
         purple: "#27143D",
         dark: "#391D59",
         orange: "#F8F7F2",
+        navy: "#1620AA"
       },
     }
 
@@ -22,6 +23,6 @@ export default {
 
 // export const dark = "#27143D"
 // export const purple = "#391D59";
-// export const orange = "#E3D894";
+// export const orange =; "#E3D894"
 // export const yellow = "#F8F7F2";
 // export const white = "#FFFFFF";

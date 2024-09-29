@@ -162,7 +162,7 @@ const TestimonialsColumn = ({ className, testimonials, duration }) => (
 export const Testimonials = () => {
   return (
     <section className=" py-20 font-BeViet bg-orange">
-      <div className="container">
+      <div className="">
         <div className="section-header">
           <div className="flex justify-center">
             <div className="tag">What our users say</div>

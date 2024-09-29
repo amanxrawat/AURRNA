@@ -6,7 +6,7 @@ import Footer from './Footer'
 const Layout = () => (WrappedComponent) => {
   return (props) => {
     return (
-      <div>
+      <div className="absolute w-[100%]">
         <Title />
         <Navbar />
 

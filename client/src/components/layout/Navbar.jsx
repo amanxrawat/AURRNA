@@ -12,16 +12,16 @@ import { RxCross1 as CrossIcon } from "react-icons/rx"
 const navitems = [
   { itemname: "Home", path: "/" },
   { itemname: "Browse", path: "/search" },
-  { itemname: "Necklaces", path: "/search" },
-  { itemname: "Bracelets", path: "/search" },
-  { itemname: "Earring", path: "/search" },
-  { itemname: "Collections", path: "/search" }
+  { itemname: "Necklaces", path: "/search/necklaces" },
+  { itemname: "Bracelets", path: "/search/bracelets" },
+  { itemname: "Earring", path: "/search/earring" },
+  { itemname: "Collections", path: "/search/collections" }
 ]
 
 
 const containerVariants = {
   close: {
-    x: 320,
+    x: 400,
     transition: {
       type: "spring",
       damping: 15,
@@ -45,8 +45,6 @@ const Navbar = () => {
 
   const [isOpen, setIsOpen] = useState(false);
 
-  const location = window.location.href;
-
   const containerControls = useAnimationControls();
 
   useEffect(() => {
@@ -62,16 +60,16 @@ const Navbar = () => {
   };
 
   return (
-    <div className='overflow-hidden'>
+    <div className='overflow-hidden sticky top-0 z-20'>
       <div className='flex flex-col w-full bg-orange sticky overscroll-none'>
         <div className="bg-dark  font-viet p-2 text-orange justify-center text-center">
           Get Exclusive Offers and Deals
         </div>
         <div className='bg-orange p-4 overflow-x-clip'>
           <div className='flex flex-row justify-between items-center text-center lg:px-12 sm:px-6'>
-            <div className='text-center hidden sm:flex items-center gap-2 border rounded-full bg-yellow px-2 border-purple'>
+            <div className='text-center hidden sm:flex items-center gap-2 border rounded-full bg-orange px-2 border-purple'>
               <SearchIcon className='text-dark' />
-              <input placeholder='Search' className='lg:w-72 md:w-48 sm:w-32 outline-none h-8 bg-yellow rounded-md placeholder-black' />
+              <input placeholder='Search' className='lg:w-72 md:w-48 sm:w-28 outline-none h-8 bg-orange rounded-md placeholder-black' />
             </div>
             <div className='items-center flex gap-2 lg:-translate-x-[88px] md:-translate-x-[40px]'>
               <img src='/Images/Logo.png' className='h-12' />
@@ -79,7 +77,6 @@ const Navbar = () => {
             </div>
 
             <div className='items-center flex gap-4' >
-              <div></div>
               <ProfileIcon onClick={() => navigate("/profile")} />
               <FavouriteIcon onClick={() => navigate("/favourite")} />
               <CartIcon className='text-xl' onClick={() => navigate("/cart")} />
@@ -107,16 +104,11 @@ const Navbar = () => {
           </div>
         </div>
         <div className='flex-row gap-5 hidden sm:flex justify-center bg-orange p-2 border-y border-dark '>
-          {navitems.forEach(
-            (item) => (item.active = location.endsWith(item.path)),
-          )}
-          {navitems.map(({ itemname, path, active }) => (
+
+          {navitems.map(({ itemname, path }) => (
             <Link
               className={twMerge(
-                "hover:text-gray-900",
-                itemname === "Home" && !location.endsWith("search")
-                  ? "border-b-2 border-dark transition-all" //apply style for active navitem here
-                  : "",
+                "hover:text-gray-900"
               )}
               key={Math.random()}
               to={path}
@@ -127,20 +119,14 @@ const Navbar = () => {
         </div>
       </div>
       {
-        <motion.div variants={containerVariants} animate={containerControls} initial="close" className="fixed right-0 flex h-[calc(100%-180px)] py-auto w-[60%] flex-row  justify-center border-l  bg-yellow  p-5  text-xl  text-white backdrop-blur-md  sm:hidden" >
+        <motion.div variants={containerVariants} animate={containerControls} initial="close" className="fixed top-[171px] z-[-2] right-0 flex h-[calc(100%-150px)] py-auto w-[60%] flex-row  justify-center border-l z-10 bg-yellow  p-5  text-xl  text-white backdrop-blur-md  sm:hidden" >
           {
             <div className='flex flex-col gap-5 justify-center items-center  '>
-              {navitems.forEach(
-                (item) => (item.active = location.endsWith(item.path)),
-              )}
               {
-                navitems.map(({ itemname, path, active }) => (
+                navitems.map(({ itemname, path }) => (
                   <Link
                     className={twMerge(
-                      "hover:text-gray-900",
-                      (active && location.endsWith("/"))
-                        ? "border-b-2 border-blue-200 text-blue-500 transition-all" //apply style for active navitem here
-                        : "",
+                      "hover:text-gray-900 text-black"
                     )}
                     key={Math.random()}
                     to={path}

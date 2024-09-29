@@ -20,7 +20,7 @@ const App = () => {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/login" element={<Login />} />
-          <Route path="/search" element={<Search />} />
+          <Route path="/search/:filter?&&:searched?" element={<Search />} />
           <Route path="/cart" element={<Cart />} />
 
           <Route element={<ProtectedRoutes />}>

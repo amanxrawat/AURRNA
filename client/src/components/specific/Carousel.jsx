@@ -15,9 +15,9 @@ const carouselImages = [
 
 const Carousel = () => {
   return (
-    <div className="bg-orange py-8 md:py-12">
-      <div className="container">
-        <div className="flex overflow-hidden [mask-image:linear-gradient(to_right,transparent,black_5%,black_95%,transparent)]">
+    <div className="bg-orange py-8 md:py-12 ">
+      <div className="">
+        <div className="flex overflow-hidden [mask-image:linear-gradient(to_right,transparent,black_5%,black_95%,transparent)] ">
           <motion.div
             className="flex flex-none gap-4 pr-4"
             animate={{
@@ -32,10 +32,9 @@ const Carousel = () => {
           >
             {
               carouselImages.map((item, index) => (
-                <div className="border rounded-t-lg h-[320px]">
+                <div className="border rounded-t-lg  h-[320px]" key={index}>
                   <div className="overflow-hidden rounded-t-lg">
                     <Link to={item.link}>
-
                       <motion.img whileHover={{ scale: 1.2 }} src={item.image} key={index} className='h-72 scale-150' />
                     </Link>
                   </div>
@@ -47,10 +46,9 @@ const Carousel = () => {
             }
             {
               carouselImages.map((item, index) => (
-                <div className="border rounded-t-lg h-[320px]">
+                <div className="border rounded-t-lg h-[320px]" key={index}>
                   <div className="overflow-hidden rounded-t-lg">
                     <Link to={item.link}>
-
                       <motion.img whileHover={{ scale: 1.2 }} src={item.image} key={index} className='h-72 scale-150' />
                     </Link>
                   </div>

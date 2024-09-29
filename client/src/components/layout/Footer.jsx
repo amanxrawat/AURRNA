@@ -14,11 +14,11 @@ const instagramLink = "https://www.google.com/";
 
 const Footer = () => {
   return (
-    <div className='bg-orange overflow-hidden bordet-t border-dark flex flex-col'>
+    <div className='bg-orange overflow-hidden bordet-t border-dark flex flex-col '>
       <div className='bg-orange border-t border-dark'>
-        <div className='flex flex-row justify-between px-20 py-5 text-dark'>
+        <div className='flex md:flex-row flex-row flex-wrap sm:flex-row sm:justify-between  justify-center  lg:px-20 px-5 py-5 text-dark'>
           <div>
-            <div >
+            <div className='hidden md:block'>
               <div className='font-bold uppercase'>online shopping</div>
               <ul className='pl-5 flex flex-col gap-1'>
                 <Link to={"/search"}>Men</Link>
@@ -26,9 +26,9 @@ const Footer = () => {
                 <Link to={"/search"}>Kids</Link>
               </ul>
             </div>
-            <div className=' my-3'>
+            <div className='md:my-3'>
               <div className='uppercase font-bold'>useful links</div>
-              <ul className='pl-5'>
+              <ul className=' md:pl-5'>
                 <li>Contact Us</li>
                 <li>Terms of Use</li>
                 <li>Privacy Policy</li>
@@ -36,12 +36,12 @@ const Footer = () => {
               </ul>
             </div>
           </div>
-          <div className='font-bold'>
+          <div className='font-bold mx-8'>
             <div>
               <div className='uppercase'>
                 keep in touch
               </div>
-              <div className=' flex flex-row gap-3 p-2'>
+              <div className=' flex lg:flex-row flex-wrap flex-row gap-3 w-[80%] p-2'>
                 <a href={facebookLink} target="blank">
                   <FacebookIcon className='scale-125' />
                 </a>
@@ -67,7 +67,7 @@ const Footer = () => {
               <div>Return within 2-3 working days</div>
             </div>
           </div>
-          <div>
+          <div className='p-2'>
             <div className='font-bold uppercase'>Join Us</div>
             <div className='uppercase text-black opacity-50 my-2'>subscribe to our newsletters</div>
             <input type="email" className='fill-orange bg-orange placeholder-dark w-full p-2 outline-none border border-dark my-2' placeholder='Email Address' />
@@ -76,7 +76,7 @@ const Footer = () => {
         </div>
       </div >
       <div className='bg-orange'>
-        <div className='border-t border-dark mx-20 p-5 flex flex-row justify-between'>
+        <div className='border-t border-dark lg:mx-20 mx-5 p-5 flex flex-row justify-between'>
           <div>
             <span >
               In Case Of Any Concern,
@@ -88,7 +88,7 @@ const Footer = () => {
           </div>
         </div>
       </div>
-    </div>
+    </div >
   )
 }
 
