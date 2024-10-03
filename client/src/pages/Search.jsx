@@ -1,181 +1,157 @@
-import React, { Link, useState } from 'react'
+import React, { useEffect, useState } from 'react'
+import Trending from "./../components/specific/Trending"
+import Card from "./../components/specific/Card"
+import { twMerge } from "tailwind-merge"
 import Layout from '../components/layout/Layout'
-import FilterButton from '../components/shared/FilterButton'
-import { productData, cartItems } from "./../constants/sampleData"
-import { useNavigate, useParams } from 'react-router-dom'
-import Card from '../components/specific/Card'
-import Trending from '../components/specific/Trending'
-import CartListItem from '../components/specific/CartListItem'
-
+import { productData } from '../constants/sampleData'
 
 
 const Search = () => {
-  const navigate = useNavigate();
-  //selected filter will have 3 arrays to keep track of selected choices
-  const [selectedFilters, setSelectedFilters] = useState({ Gender: [], Material: [], Category: [] });
-  const [filteredProducts, setFilteredProducts] = useState(productData);
 
-  //add or remove filters 
-  const handleFilterButtonClick = (item, category) => {
-    if (selectedFilters[category].includes(item)) {
-      let filters = selectedFilters;
-      filters[category] = filters[category].filter((el) => el !== item);
-      setSelectedFilters(filters);
+  const [showFilter, setShowFilter] = useState(false);
+  const [filterProducts, setFilterProducts] = useState([]);
+  const [category, setCategory] = useState([]);
+  const [material, setMaterial] = useState([]);
+  const [type, setType] = useState([]);
+
+
+  const [sortType, setSortType] = useState("relevent")
+
+  const toggleCategory = (e) => {
+    if (category.includes(e.target.value)) {
+      setCategory(prev => prev.filter(item => item !== e.target.value))
     } else {
-
-      let filters = selectedFilters;
-      filters[category].push(item);
-
-      setSelectedFilters(filters);
+      setCategory(prev => [...prev, e.target.value], e.target.value)
     }
-    if (selectedFilters.Gender.length + selectedFilters.Material.length + selectedFilters.Category.length
-      === 0) {
-      setFilteredProducts([...productData])
-    }
-    filterItems()
-  };
+  }
 
-
-  //Filter products according to filters
-  const filterItems = () => {
-    if (selectedFilters.Gender.length + selectedFilters.Material.length + selectedFilters.Category.length
-      >= 0) {
-
-      let filteredOnce = [];
-
-      productData.forEach((product) => {
-        if (selectedFilters.Gender.length > 0) {
-          if (selectedFilters.Gender.includes(product.Gender)) {
-            filteredOnce.push(product)
-          }
-        }
-        else {
-          filteredOnce = productData;
-        }
-      })
-
-
-      let filteredTwice = [];
-
-      filteredOnce.forEach((product) => {
-        if (selectedFilters.Material.length > 0) {
-          if (selectedFilters.Material.includes(product.Material)) {
-            filteredTwice.push(product)
-          }
-        }
-        else {
-          filteredTwice = filteredOnce
-        }
-      })
-
-      let filteredThrice = [];
-
-      filteredTwice.forEach((product) => {
-        if (selectedFilters.Category.length > 0) {
-          if (selectedFilters.Category.includes(product.Category)) {
-            filteredThrice.push(product)
-          }
-        } else {
-          filteredThrice = filteredTwice;
-        }
-      })
-
-      setFilteredProducts(filteredThrice);
+  const toggleMaterial = (e) => {
+    if (material.includes(e.target.value)) {
+      setMaterial(prev => prev.filter(item => item !== e.target.value))
     } else {
-      setFilteredProducts([...productData]);
+      setMaterial(prev => [...prev, e.target.value])
     }
-  };
+  }
+  const toggleType = (e) => {
+    if (type.includes(e.target.value)) {
+      setType(prev => prev.filter(item => item !== e.target.value))
+    } else {
+      setType(prev => [...prev, e.target.value])
+    }
+  }
 
+  const applyFilter = () => {
+    let productsCopy = productData.slice();
+    if (category.length > 0) {
+      productsCopy = productsCopy.filter(item => category.includes(item.Gender))
+    }
+    if (material.length > 0) {
+      productsCopy = productsCopy.filter(item => material.includes(item.Material))
+    }
+    if (type.length > 0) {
+      productsCopy = productsCopy.filter(item => type.includes(item.Category))
+    }
 
-  //important to spell right here filters to work
-  const Gender = ["Male", "Female", "Child"]
-  const Material = ["Silver", "Gold"]
-  const Categories = ["Bracelet", "Necklace", "Earring", "Collection"]
+    setFilterProducts(productsCopy)
+  }
+
+  const sortProduct = () => {
+    let filterProductsCopy = filterProducts.slice();
+    switch (sortType) {
+      case "low-high":
+        setFilterProducts(filterProductsCopy.sort((a, b) => (a.Price - b.Price)))
+        break;
+      case "high-low":
+        setFilterProducts(filterProductsCopy.sort((a, b) => (b.Price - a.Price)))
+        break
+      default:
+        applyFilter()
+        break;
+    }
+  }
+
+  useEffect(() => {
+    applyFilter()
+  }, [category, material, type])
+
+  useEffect(() => {
+    sortProduct()
+  }, [sortType])
 
   return (
-    <div className='h-full'>
-      <div className='flex flex-row h-full'>
-        <div className="bg-white pl-4 py-2 w-[20%] flex flex-col gap-5">
-          <div>
-            <div className='font-Corm text-2xl pb-1'>Sort By</div>
-            <div className='flex-row gap-1 justify-between px-1 py-2'>
-              <select className='p-1 m-1 border'>
-                <option>Price</option>
-                <option>Discount</option>
-                <option>Popularity</option>
-              </select>
-              <select className='p-1 m-1 border'>
-                <option>Increasing</option>
-                <option>Decreasing</option>
-              </select>
-            </div>
+    <div className="flex flex-col sm:flex-row gap-1 sm:gap-10 pt-10 border-t px-10">
+      <div className="min-w-40 pb-10">
+        <p className='my-2 text-2xl flex items-center cursor-pointer gap-2 uppercase pl-1 font-Corm'>filter</p>
+        <div className={twMerge('border pl-5 py-3 m-1', !showFilter ? '' : 'hidden')}>
+          <p className=' text-xl font-medium pb-2 font-Corm '>Gender</p>
+          <div className='flex flex-col gap-2 text-sm text-dark '>
+            <p className='flex gap-2'>
+              <input className="w-3" type='checkbox' value={"Male"} onChange={toggleCategory} /> Male
+            </p>
+            <p className='flex gap-2'>
+              <input className="w-3" type='checkbox' value={"Female"} onChange={toggleCategory} /> Female
+            </p>
+            <p className='flex gap-2'>
+              <input className="w-3" type='checkbox' value={"Child"} onChange={toggleCategory} /> Child
+            </p>
 
-          </div>
-          <div>
-            <p className='font-Corm text-2xl pb-1'>Gender</p>
-            <div className='flex flex-row flex-wrap pl-4 gap-2'>
-              {
-                Gender.map((item, index) =>
-                  <div onClick={() => { handleFilterButtonClick(item, "Gender") }} className='w-fit border' key={index}>
-                    <FilterButton text={item} className={"bg-navy text-white "} />
-                  </div>
-                )
-              }
-            </div>
-          </div>
-          <div>
-            <p className='font-Corm text-2xl pb-1'>Material</p>
-            <div className='flex flex-row flex-wrap pl-4 gap-2'>
-              {
-                Material.map((item, index) =>
-                  <div onClick={() => handleFilterButtonClick(item, "Material")} key={index}>
-                    <FilterButton text={item} className={"bg-yellow text-gray-500"} />
-                  </div>
-                )
-              }</div>
-          </div>
-          <div>
-            <p className='font-Corm text-2xl pb-1'>Categories</p>
-            <div className='flex flex-row flex-wrap pl-4 gap-2'>
-              {
-                Categories.map((item, index) =>
-                  <div onClick={() => handleFilterButtonClick(item, "Category")} key={index}>
-                    <FilterButton text={item} className={"bg-navy text-white"} />
-                  </div>
-                )
-              }</div>
-          </div>
-
-        </div>
-        <div className=" w-[60%]">
-          <div className='flex px-auto py-4 px-3 items-center'>
-            <div className=' p-3 flex flex-wrap gap-3 '>
-              {filteredProducts.length > 0 ?
-                filteredProducts.map((item, index) => {
-                  return <Card key={index} Name={item.Name} Image={item.Image} Gender={item.Gender} Material={item.Material} Category={item.Category} Price={item.Price} />
-                }) : <div>
-                  <h1 className='lowercase'>we dont have that right now, would you like to search for something else like : </h1>
-                  <Trending />
-                </div>
-              }
-            </div>
           </div>
         </div>
-
-        <div className="bg-dark w-[20%]" onClick={() => navigate("/cart")}>
-          <p className='text-xl font-semibold text-center p-2 text-white'>Your Cart</p>
-          <div >
-
-            {
-              cartItems.map((item, index) => {
-                return <div>
-                  <CartListItem Name={item.Name} Image={item.Image} key={index} />
-                </div>
-              })
-            }
+        <div className={twMerge('border pl-5 py-3 m-1 ', !showFilter ? '' : 'hidden')}>
+          <p className=' text-xl font-medium pb-2 font-Corm'>Material</p>
+          <div className='flex flex-col gap-2 text-sm text-dark '>
+            <p className='flex gap-2'>
+              <input className="w-3" type='checkbox' value={"Gold"} onChange={toggleMaterial} /> Gold
+            </p>
+            <p className='flex gap-2'>
+              <input className="w-3" type='checkbox' value={"Silver"} onChange={toggleMaterial} /> Silver
+            </p>
           </div>
-
         </div>
+        <div className={twMerge('border pl-5 py-3 m-1 ', !showFilter ? '' : 'hidden')}>
+          <p className=' text-xl font-medium pb-2 font-Corm'>Type</p>
+          <div className='flex flex-col gap-2 text-sm text-dark '>
+            <p className='flex gap-2'>
+              <input className="w-3" type='checkbox' value={"Necklace"} onChange={toggleType} /> Necklace
+            </p>
+            <p className='flex gap-2'>
+              <input className="w-3" type='checkbox' value={"Bracelet"} onChange={toggleType} /> Bracelet
+            </p>
+            <p className='flex gap-2'>
+              <input className="w-3" type='checkbox' value={"Earring"} onChange={toggleType} /> Earring
+            </p>
+            <p className='flex gap-2'>
+              <input className="w-3" type='checkbox' value={"Chain"} onChange={toggleType} /> Chain
+            </p>
+            <p className='flex gap-2'>
+              <input className="w-3" type='checkbox' value={"Ring"} onChange={toggleType} /> Ring
+            </p>
+          </div>
+        </div>
+      </div>
+      <div className='flex-1'>
+        <div className='flex justify-between text-base sm:text-2xl mb-4'>
+          <h1 className='font-Corm uppercase'>our products</h1>
+          <select className="border-2 text-sm px-2" onChange={(e) => { setSortType(e.target.value) }} >
+            <option value="relevant">Sort by : Relevence</option>
+            <option value="low-high">Sort by : Low to High</option>
+            <option value="high-low">Sort by : High to Low</option>
+          </select>
+        </div>
+        {
+
+          filterProducts.length > 0 ?
+            <div className='grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 gap-y-6 py-4'>
+              {
+                filterProducts.map((item, index) => (
+                  <Card key={index} Name={item.Name} Image={item.Image} Gender={item.Gender} Material={item.Material} Category={item.Category} Price={item.Price} />)
+                )
+              }</div> :
+            <div >
+              <h1 className='lowercase'>we dont have that right now, would you like to search for something else like : </h1>
+              <Trending className={"py-1"} width={"w-48"} />
+            </div>
+        }
       </div>
     </div >
   )

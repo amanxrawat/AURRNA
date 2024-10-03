@@ -12,10 +12,9 @@ import { RxCross1 as CrossIcon } from "react-icons/rx"
 const navitems = [
   { itemname: "Home", path: "/" },
   { itemname: "Browse", path: "/search" },
-  { itemname: "Necklaces", path: "/search/necklaces" },
-  { itemname: "Bracelets", path: "/search/bracelets" },
-  { itemname: "Earring", path: "/search/earring" },
-  { itemname: "Collections", path: "/search/collections" }
+  { itemname: "Contact", path: "/contact" },
+  { itemname: "About", path: "/about" },
+  // { itemname: "", path: " " },
 ]
 
 
@@ -67,7 +66,7 @@ const Navbar = () => {
         </div>
         <div className='bg-orange p-4 overflow-x-clip'>
           <div className='flex flex-row justify-between items-center text-center lg:px-12 sm:px-6'>
-            <div className='text-center hidden sm:flex items-center gap-2 border rounded-full bg-orange px-2 border-purple'>
+            <div className='text-center hidden sm:flex items-center gap-2 border rounded-full bg-orange px-2 border-purple' onClick={() => navigate("/search")}>
               <SearchIcon className='text-dark' />
               <input placeholder='Search' className='lg:w-72 md:w-48 sm:w-28 outline-none h-8 bg-orange rounded-md placeholder-black' />
             </div>
@@ -79,7 +78,10 @@ const Navbar = () => {
             <div className='items-center flex gap-4' >
               <ProfileIcon onClick={() => navigate("/profile")} />
               <FavouriteIcon onClick={() => navigate("/favourite")} />
-              <CartIcon className='text-xl' onClick={() => navigate("/cart")} />
+              <div className='relative'>
+                <CartIcon className='text-xl' onClick={() => navigate("/cart")} />
+                <p className='absolute text-[10px] bg-black text-white rounded-full px-1 text-center aspect-square right-[-10px] bottom-[-10px]'>5</p>
+              </div>
               <button className='pl-4'>
                 {
                   user ? (
@@ -93,9 +95,9 @@ const Navbar = () => {
           </div>
         </div>
         <div className=' items-center border-y border-purple  flex sm:hidden  justify-between px-2 py-2 '>
-          <div className=' flex justify-between items-center px-2 w-[60%] gap-4 border rounded-full bg-yellow border-purple'>
+          <div className=' flex justify-between items-center px-2 w-[60%] gap-4 border rounded-full bg-orange border-purple' onClick={() => navigate("/search")}>
             <SearchIcon className='text-dark sm-scale-[2.5] ' />
-            <input placeholder='Search' className='lg:w-72 md:w-48 sm:w-40 outline-none h-8 bg-yellow rounded-md placeholder-black' />
+            <input placeholder='Search' className='lg:w-72 md:w-48 sm:w-40 outline-none h-8 bg-orange rounded-md placeholder-black' />
           </div>
           <div className='px-2'>
             {
@@ -105,12 +107,12 @@ const Navbar = () => {
         </div>
         <div className='flex-row gap-5 hidden sm:flex justify-center bg-orange p-2 border-y border-dark '>
 
-          {navitems.map(({ itemname, path }) => (
+          {navitems.map(({ itemname, path }, index) => (
             <Link
               className={twMerge(
                 "hover:text-gray-900"
               )}
-              key={Math.random()}
+              key={index}
               to={path}
             >
               {itemname}
@@ -119,16 +121,16 @@ const Navbar = () => {
         </div>
       </div>
       {
-        <motion.div variants={containerVariants} animate={containerControls} initial="close" className="fixed top-[171px] z-[-2] right-0 flex h-[calc(100%-150px)] py-auto w-[60%] flex-row  justify-center border-l z-10 bg-yellow  p-5  text-xl  text-white backdrop-blur-md  sm:hidden" >
+        <motion.div variants={containerVariants} animate={containerControls} initial="close" className="fixed top-[171px] z-[-2] right-0 flex h-[calc(100%-150px)] py-auto w-[60%] flex-row  justify-center border-l  bg-orange  p-5  text-xl  text-white backdrop-blur-md  sm:hidden" >
           {
             <div className='flex flex-col gap-5 justify-center items-center  '>
               {
-                navitems.map(({ itemname, path }) => (
+                navitems.map(({ itemname, path }, index) => (
                   <Link
                     className={twMerge(
                       "hover:text-gray-900 text-black"
                     )}
-                    key={Math.random()}
+                    key={index}
                     to={path}
                   >
                     {itemname}

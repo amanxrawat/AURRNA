@@ -1,8 +1,9 @@
 import React from 'react'
+import { twMerge } from 'tailwind-merge'
 
-const ProductCard = ({ image, title, price, discount }) => {
+const ProductCard = ({ image, title, price, discount, className }) => {
   return (
-    <div className=' w-60 flex flex-col border border-gray-200 gap-1'>
+    <div className={twMerge(' w-60 flex flex-col border border-gray-200 gap-1', className)}>
       <div className='h-72 p-2 items-center mx-auto rounded-md'>
         <img src={image} className='h-72 rounded-md' />
       </div>

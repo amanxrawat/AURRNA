@@ -14,7 +14,7 @@ const Layout = () => (WrappedComponent) => {
           <WrappedComponent {...props} />
         </div>
 
-        <Footer />
+        <Footer className={"bottom-0"} />
       </div>
     )
   }

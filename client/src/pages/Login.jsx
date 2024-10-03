@@ -1,4 +1,5 @@
 import React from 'react'
+import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom'
 
 const Login = () => {
@@ -7,6 +8,14 @@ const Login = () => {
   window.onpopstate = (event) => {
     navigate("/")
   }
+
+  // const dispatch = useDispatch();
+  // const handleLoginEvent = (e) => {
+  //   e.preventDefaut();
+  //   let userCredentials = {
+  //     email, password
+  //   }
+  // }
   return (
     <div>
 

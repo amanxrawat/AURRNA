@@ -6,15 +6,16 @@ import {
   FaInstagram as InstagramIcon
 } from 'react-icons/fa6'
 import { Link } from 'react-router-dom'
+import { twMerge } from "tailwind-merge"
 
 const facebookLink = "https://www.google.com/";
 const youtubeLink = "https://www.google.com/";
 const twitterLink = "https://www.google.com/";
 const instagramLink = "https://www.google.com/";
 
-const Footer = () => {
+const Footer = ({ className }) => {
   return (
-    <div className='bg-orange overflow-hidden bordet-t border-dark flex flex-col '>
+    <div className={twMerge('bg-orange overflow-hidden bordet-t border-dark flex flex-col ', className)}>
       <div className='bg-orange border-t border-dark'>
         <div className='flex md:flex-row flex-row flex-wrap sm:flex-row sm:justify-between  justify-center  lg:px-20 px-5 py-5 text-dark'>
           <div>

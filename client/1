@@ -11,7 +11,6 @@ const Search = lazy(() => import("./pages/Search"))
 const Favourite = lazy(() => import("./pages/Favourite"))
 const Cart = lazy(() => import("./pages/Cart"))
 const Contact = lazy(() => import("./pages/Contact"))
-const About = lazy(() => import("./pages/About"))
 
 const user = false;
 
@@ -25,7 +24,6 @@ const App = () => {
           <Route path="/search/:filter?" element={<Search />} />
           <Route path="/cart" element={<Cart />} />
           <Route path="/contact" element={<Contact />} />
-          <Route path="/about" element={<About />} />
 
           <Route element={<ProtectedRoutes />}>
             <Route path="/favourite" element={<Favourite />} />

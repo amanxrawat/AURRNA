@@ -126,6 +126,7 @@ const productData =
   ]
 
 
+
 const cartItems = [
   {
     Name: "Kid's Chain",
