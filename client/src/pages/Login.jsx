@@ -18,8 +18,14 @@ const Login = () => {
   // }
   return (
     <>
-      
-
+      <div className='bg-orange'>
+        <form className='flex flex-col gap-5 '>
+          <label>Put email</label>
+          <input type='email' />
+          <label>Put password</label>
+          <input type='password' />
+        </form>
+      </div>
     </>
   )
 }

@@ -1,18 +1,25 @@
-// import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-// import axios from "axios";
-//
-// export const loginUser = createAsyncThunk("UserLogin", async (UserCredentials) => {
-//   const request = await axios.post("api/user/login", UserCredentials)
-//
-// })
-//
-// const userSlice = createSlice({
-//   name: "user",
-//   initialState: {
-//     loading: false,
-//     use: null,
-//     error: null
-//   }
-// })
-//
-// export default userSlice.reducer;
+import { createSlice } from "@reduxjs/toolkit";
+
+const initialState = {
+  user: null,
+  isAdmin: false,
+  loader: true,
+}
+
+const authSlice = createSlice({
+  name: "auth",
+  initialState,
+  reducers: {
+    userExists: (state, action) => {
+      state.user = action.payload;
+      state.loader = false;
+    },
+    userNotExists: (state) => {
+      state.user = null;
+      state.loader = false;
+    }
+  }
+})
+
+export default authSlice;
+export const { userExists, userNotExists } = authSlice.actions;
