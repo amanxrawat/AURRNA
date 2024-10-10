@@ -1,9 +1,8 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import { lazy, Suspense } from "react";
+import { useEffect, lazy, Suspense } from "react";
 
 import Loader from "./components/layout/Loader";
 import ProtectedRoutes from "./components/auth/ProtectedRoutes";
-import Sidebar from "./components/admin/Sidebar";
 
 const Home = lazy(() => import("./pages/Home"))
 const Login = lazy(() => import("./pages/Login"))
@@ -27,7 +26,7 @@ const App = () => {
           <Route path="/cart" element={<Cart />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/about" element={<About />} />
-          <Route path="/admin" element={<Sidebar/>}/>
+
           <Route element={<ProtectedRoutes />}>
             <Route path="/favourite" element={<Favourite />} />
             <Route path="/profile" element={<Profile />} />
