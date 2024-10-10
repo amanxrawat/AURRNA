@@ -6,7 +6,7 @@ import ProtectedRoutes from "./components/auth/ProtectedRoutes";
 import axios from "axios";
 import { server } from "./constants/config";
 import { useDispatch, useSelector } from "react-redux";
-
+import Sidebar from "./components/admin/Sidebar";
 import { userNotExists } from "./redux/features/auth/authSlice";
 
 const Home = lazy(() => import("./pages/Home"));
@@ -42,7 +42,7 @@ const App = () => {
 					<Route path="/contact" element={<Contact />} />
 					<Route path="/about" element={<About />} />
 					<Route path="/product/:productId" element={<Product />} />
-
+          {/* <Route path="/admin" element={<Sidebar/>} /> */}
 					<Route element={<ProtectedRoutes />}>
 						<Route path="/favourite" element={<Favourite />} />
 						<Route path="/profile" element={<Profile />} />

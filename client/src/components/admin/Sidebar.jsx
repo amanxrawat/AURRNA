@@ -1,9 +1,11 @@
 import React, { useState } from 'react'
 import { useRef } from 'react';
-import { FaTachometerAlt, FaBoxOpen, FaCartPlus, FaClipboardList } from 'react-icons/fa';
+import { FaUser, FaUserPlus, FaTrashAlt, FaHome } from 'react-icons/fa';
 import gsap from 'gsap';
+import { useNavigate } from 'react-router-dom';
 
 function Sidebar() {
+    const navigate = useNavigate();
     const sidebarRef = useRef()
     const [isCollapsed, setIsCollapsed] = useState(true);
 
@@ -11,7 +13,7 @@ function Sidebar() {
 
         const tl = gsap.timeline()
         tl.to(sidebarRef.current, {
-            width: isCollapsed ? "16rem" : "4rem",
+            width: isCollapsed ? "15rem" : "4rem",
             duration: 0.5,
             ease: "power3.out",
         });
@@ -39,12 +41,10 @@ function Sidebar() {
         setIsCollapsed(!isCollapsed);
     };
 
-
-
     return (
      
 
-        <>
+        <header>
             <div>
                 <div className='relative max-w-[16rem] ' 
                 // onMouseLeave={handleHover}
@@ -54,50 +54,51 @@ function Sidebar() {
                         onClick={handleHover}
                         // onMouseEnter={handleHover}
                         // onMouseLeave={handleHover}
-                        className="sidebar bg-purple-500 h-screen w-[4rem] flex flex-col items-center justify-between py-10 absolute left-0 top-0 z-[1]"
+                        className="sidebar bg-yellow-800 h-screen w-[4rem] flex flex-col items-center justify-between py-10 absolute left-0 top-0 z-[1]"
                     >
                     </div>
 
 
                     <div className='sideBarIcons absolute left-0 top-8 flex flex-col gap-4 z-[2] items-center '>
 
-                        <div className=' group w-full  '>
-                            <div className='   flex  items-center group-hover:bg-purple-800 group-hover:rounded-r-md  '>
-                                <div className='w-12 h-12 bg-slate-800 flex items-center justify-center hover:scale-125  group-hover:border-4 group-hover:border-orange-400 translate-x-[0.5rem] rounded-full transition-all'>
-                                    < FaTachometerAlt size={24}></FaTachometerAlt>
+                        <div className=' group w-full  ' onClick={() => navigate("/home")}>
+                            <div className='   flex  items-center group-hover:bg-yellow-950 group-hover:rounded-r-md  '>
+                                <div className='w-12 h-12 bg-yellow-950 flex items-center justify-center  hover:scale-125  group-hover:border-4 group-hover:border-orange-400 translate-x-[0.5rem] rounded-full transition-all'>
+                                    < FaHome className='' size={24}></FaHome>
                                 </div>
                                 <div className='innerText'>
-                                    {!isCollapsed && <span className=" ml-8 font-bold text-white">Dashboard</span>}
+                                    {!isCollapsed && <span className=" ml-8 font-bold text-white">Home</span>}
                                 </div>
                             </div>
                         </div>
-                        <div className=' group w-full'>
-                            <div className='flex items-center  group-hover:bg-purple-800 group-hover:rounded-r-md  '>
-                                <div className='w-12 h-12 bg-slate-800 flex items-center justify-center hover:scale-125  group-hover:border-4 group-hover:border-orange-400 translate-x-[0.5rem] rounded-full transition-all'>
-                                    < FaBoxOpen size={24}></FaBoxOpen>
+                        <div className=' group w-full' onClick={() => navigate("/user-management")}>
+                            <div className='flex items-center  group-hover:bg-yellow-950 group-hover:rounded-r-md  '>
+                                <div className='w-12 h-12 bg-yellow-950 flex items-center justify-center hover:scale-125  group-hover:border-4 group-hover:border-orange-400 translate-x-[0.5rem] rounded-full transition-all'>
+                                    < FaUserPlus size={24}></FaUserPlus>
                                 </div>
                                 <div className='innerText'>
-                                    {!isCollapsed && <span className=" ml-8  font-bold text-white">Add Product</span>}
+                                    {!isCollapsed && <span className=" ml-8  font-bold text-white">Create User</span>}
                                 </div>
                             </div>
                         </div>
-                        <div className=' group w-full'>
-                            <div className='flex items-center  group-hover:bg-purple-800 group-hover:rounded-r-md  '>
-                                <div className='w-12 h-12 bg-slate-800 flex items-center justify-center hover:scale-125  group-hover:border-4 group-hover:border-orange-400 translate-x-[0.5rem] rounded-full transition-all'>
-                                    < FaClipboardList size={24}></FaClipboardList>
+                        <div className=' group w-full' onClick={() => navigate("/update-user")}>
+                            <div className='flex items-center  group-hover:bg-yellow-950 group-hover:rounded-r-md  '>
+                                <div className='w-12 h-12 bg-yellow-950  flex items-center justify-center hover:scale-125  group-hover:border-4 group-hover:border-orange-400 translate-x-[0.5rem] rounded-full transition-all'>
+                                    < FaUser size={24}></FaUser>
                                 </div>
                                 <div className='innerText'>
-                                    {!isCollapsed && <span className=" ml-8 mr-10 font-bold text-white">View Products</span>}
+                                    {!isCollapsed && <span className=" ml-8 mr-10 font-bold text-white">Update User</span>}
                                 </div>
                             </div>
                         </div>
-                        <div className=' group w-full'>
-                            <div className='flex items-center  group-hover:bg-purple-800 group-hover:rounded-r-md  '>
-                                <div className='w-12 h-12 bg-slate-800 flex items-center justify-center hover:scale-125  group-hover:border-4 group-hover:border-orange-400 translate-x-[0.5rem] rounded-full transition-all'>
-                                    < FaCartPlus size={24}></FaCartPlus>
+                        <div className=' group w-full'
+                        onClick={() => navigate("/delete-user")}>
+                            <div className='flex items-center  group-hover:bg-yellow-950 group-hover:rounded-r-md  '>
+                                <div className='w-12 h-12 bg-yellow-950  flex items-center justify-center hover:scale-125  group-hover:border-4 group-hover:border-orange-400 translate-x-[0.5rem] rounded-full transition-all'>
+                                    < FaTrashAlt size={24}></FaTrashAlt>
                                 </div>
                                 <div className='innerText'>
-                                    {!isCollapsed && <span className=" ml-8 mr-24 font-bold text-white">All Orders</span>}
+                                    {!isCollapsed && <span className=" ml-8 mr-16 font-bold text-white">Delete User</span>}
                                 </div>
                             </div>
                         </div>
@@ -107,7 +108,7 @@ function Sidebar() {
             </div>
 
 
-        </>
+        </header>
 
 
 
