@@ -10,7 +10,7 @@ const Search = () => {
   const { search } = useSelector((state) => state.search);
 
   useEffect(() => {
-    console.log("searchBrowse", search);
+    console.log(search);
   }, [search]);
 
   const [showFilter, setShowFilter] = useState(false);
@@ -46,15 +46,9 @@ const Search = () => {
 
   const applyFilter = () => {
     let productsCopy = productData.slice();
-    console.log(search.length);
 
     if (search.length > 0) {
       productsCopy = productsCopy.filter((item) => {
-        console.log(
-          item.Name.toLowerCase(),
-          search.toLowerCase(),
-          item.Name.toLowerCase().includes(search.toLowerCase()),
-        );
         return item.Name.toLowerCase().includes(search.toLowerCase());
       });
     }

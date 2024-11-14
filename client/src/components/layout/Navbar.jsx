@@ -4,10 +4,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { motion, useAnimationControls } from "framer-motion";
 
 import { IoSearch as SearchIcon, IoMenu as MenuIcon } from "react-icons/io5";
-import {
-	FaRegUser as ProfileIcon,
-	FaRegHeart as FavouriteIcon,
-} from "react-icons/fa6";
+import { FaRegUser as ProfileIcon } from "react-icons/fa6";
 import { PiShoppingCart as CartIcon } from "react-icons/pi";
 import { RxCross1 as CrossIcon } from "react-icons/rx";
 import { useSelector, useDispatch } from "react-redux";
@@ -43,6 +40,9 @@ const containerVariants = {
 const Navbar = () => {
 	const dispatch = useDispatch();
 	const { user } = useSelector((state) => state.auth);
+	const { cart } = useSelector((state) => state.cart);
+	const { search } = useSelector((state) => state.search);
+
 	const navigate = useNavigate();
 
 	const [isOpen, setIsOpen] = useState(false);
@@ -88,6 +88,7 @@ const Navbar = () => {
 						>
 							<SearchIcon className="text-dark" />
 							<input
+								defaultValue={search}
 								placeholder="Search"
 								className="lg:w-72 md:w-48 sm:w-28 outline-none h-8 bg-orange rounded-md placeholder-black"
 							/>
@@ -104,14 +105,13 @@ const Navbar = () => {
 
 						<div className="items-center flex gap-4">
 							<ProfileIcon onClick={() => navigate("/profile")} />
-							<FavouriteIcon onClick={() => navigate("/favourite")} />
 							<div className="relative">
 								<CartIcon
 									className="text-xl"
 									onClick={() => navigate("/cart")}
 								/>
 								<p className="absolute text-[10px] bg-black text-white rounded-full px-1 text-center aspect-square right-[-10px] bottom-[-10px]">
-									5
+									{cart.length}
 								</p>
 							</div>
 							<button className="pl-4">
@@ -148,6 +148,7 @@ const Navbar = () => {
 						<SearchIcon className="text-dark sm-scale-[2.5] " />
 						<input
 							placeholder="Search"
+							defaultValue={search}
 							className="lg:w-72 md:w-48 sm:w-40 outline-none h-8 bg-orange rounded-md placeholder-black"
 						/>
 					</div>

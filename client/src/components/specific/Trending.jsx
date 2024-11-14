@@ -1,24 +1,37 @@
 import React from "react";
-import ProductCard from "./../shared/ProductCard";
 import { twMerge } from "tailwind-merge";
+import Card from "./Card";
 
-import { jeweleryProducts } from "./../../constants/sampleData";
+import { productData } from "./../../constants/sampleData";
 
-const Trending = ({ className, width }) => {
-  return (
-    <div className={twMerge("py-8 border-y", className)}>
-      <div className="flex flex-col">
-        <h1 className="text-5xl text-center font-Corm p-8">Trending Now</h1>
-        <div className="flex flex-row items-center text-center p-2">
-          <div className="flex flex-row gap-2 mx-auto lg:justify-evenly justify-evenly flex-wrap">
-            {jeweleryProducts.map((item, index) => (
-              <ProductCard {...item} key={index} className={width} />
-            ))}
-          </div>
-        </div>
-      </div>
-    </div>
-  );
+const Trending = ({ className, width, size = 5 }) => {
+	return (
+		<div className={twMerge("py-8 border-y", className)}>
+			<div className="flex flex-col">
+				<h1 className="text-5xl text-center font-Corm p-8">Trending Now</h1>
+				<div className="flex flex-row items-center text-center p-2">
+					<div className="flex flex-row gap-2 mx-auto lg:justify-evenly justify-evenly flex-wrap">
+						{productData.map((item, index) =>
+							index < size ? (
+								<Card
+									key={index}
+									Name={item.Name}
+									Images={item.Images}
+									Gender={item.Gender}
+									Material={item.Material}
+									Category={item.Category}
+									Price={item.Price}
+									ProductId={item.ProductId}
+								/>
+							) : (
+								<div key={index}></div>
+							),
+						)}
+					</div>
+				</div>
+			</div>
+		</div>
+	);
 };
 
 export default Trending;

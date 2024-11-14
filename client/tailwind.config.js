@@ -13,10 +13,9 @@ export default {
         purple: "#27143D",
         dark: "#391D59",
         orange: "#F8F7F2",
-        navy: "#1620AA"
+        navy: "#1620AA",
       },
-    }
-
+    },
   },
   plugins: [],
 };

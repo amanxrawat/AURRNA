@@ -4,11 +4,14 @@ import { useParams } from "react-router-dom";
 
 import { FaStar as StarIcon } from "react-icons/fa6";
 import RelatedProducts from "../components/specific/RelatedProducts";
-// import { IoStarOutline as StarIcon } from "react-icons/io5";
 
 import { productData } from "./../constants/sampleData";
+import { useDispatch, useSelector } from "react-redux";
+import { addItem, removeItem } from "../redux/features/cart/cartSlice";
 
 const Product = () => {
+	const dispatch = useDispatch();
+	const { cart } = useSelector((state) => state.cart);
 	const { productId } = useParams();
 
 	const product = productData.filter((item) => item.ProductId == productId)[0];
@@ -19,6 +22,14 @@ const Product = () => {
 	useEffect(() => {
 		fetchProductData(productId);
 	}, [productId]);
+
+	useEffect(() => {
+		console.log("cart : ", cart);
+	}, [cart]);
+
+	const handleCart = (product) => {
+		dispatch(addItem(product));
+	};
 
 	const productSizes = ["sm", "md", "lg", "xl"];
 
@@ -33,7 +44,6 @@ const Product = () => {
 					<div className="flex-1 flex fllex-col-reverse gap-3 sm:flex-row">
 						<div className="flex gap-1 sm:flex-col overflow-x-auto sm:overflow-y-scroll justify-between sm:justify-normal sm:w-[20%] w-full">
 							{product.Images.map((item, index) => {
-								console.log("ProductIages map", item);
 								return (
 									<img
 										src={item}
@@ -85,7 +95,12 @@ const Product = () => {
 								))}
 							</div>
 						</div>
-						<button className="bg-dark active:bg-gray-500 text-white px-8 py-3 text-sm">
+						<button
+							className="bg-dark active:bg-gray-500 text-white px-8 py-3 text-sm"
+							onClick={(e) => {
+								handleCart(product);
+							}}
+						>
 							Add to Cart
 						</button>
 						<hr className="mt-8 sm:w-4/5" />

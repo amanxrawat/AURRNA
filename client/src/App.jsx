@@ -13,7 +13,6 @@ const Home = lazy(() => import("./pages/Home"));
 const Login = lazy(() => import("./pages/Login"));
 const Profile = lazy(() => import("./pages/Profile"));
 const Search = lazy(() => import("./pages/Search"));
-const Favourite = lazy(() => import("./pages/Favourite"));
 const Cart = lazy(() => import("./pages/Cart"));
 const Contact = lazy(() => import("./pages/Contact"));
 const About = lazy(() => import("./pages/About"));
@@ -44,7 +43,6 @@ const App = () => {
 					<Route path="/product/:productId" element={<Product />} />
           {/* <Route path="/admin" element={<Sidebar/>} /> */}
 					<Route element={<ProtectedRoutes />}>
-						<Route path="/favourite" element={<Favourite />} />
 						<Route path="/profile" element={<Profile />} />
 					</Route>
 				</Routes>

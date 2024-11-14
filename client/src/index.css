@@ -20,13 +20,13 @@
     @apply inline-flex rounded-lg  px-3 py-1 text-sm bg-gray-100 tracking-tight;
   }
   .section-title {
-    @apply bg-gradient-to-b from-dark to-black bg-clip-text text-center text-3xl font-bold tracking-tighter text-transparent md:text-[54px] md:leading-[60px];
+    @apply text-center font-Corm text-3xl py-2 text-dark;
   }
   .section-description {
     @apply text-center max-w-xl justify-center text-[22px] leading-[30px] tracking-tight text-dark;
   }
   .section-heading {
-    @apply mx-auto max-w-[480px];
+    @apply font-Corm text-5xl pt-4 pb-8 text-dark;
   }
   .card {
     @apply w-full max-w-xs rounded-3xl border border-[#F1F1F1] p-10 shadow-[0_7px_14px_#EAEAEA];
