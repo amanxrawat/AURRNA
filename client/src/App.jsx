@@ -23,12 +23,12 @@ const App = () => {
 
 	const dispatch = useDispatch();
 
-	useEffect(() => {
-		axios
-			.get(`${server}/api/v1/user/login`)
-			.then((res) => console.log(res))
-			.catch((err) => dispatch(userNotExists()));
-	}, [dispatch]);
+	// useEffect(() => {
+	// 	axios
+	// 		.get(`${server}/api/v1/user/login`)
+	// 		.then((res) => console.log(res))
+	// 		.catch((err) => dispatch(userNotExists()));
+	// }, [dispatch]);
 
 	return (
 		<BrowserRouter>

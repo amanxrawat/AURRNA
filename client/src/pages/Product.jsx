@@ -7,7 +7,7 @@ import RelatedProducts from "../components/specific/RelatedProducts";
 
 import { productData } from "./../constants/sampleData";
 import { useDispatch, useSelector } from "react-redux";
-import { addItem, removeItem } from "../redux/features/cart/cartSlice";
+import { addItem } from "../redux/features/cart/cartSlice";
 
 const Product = () => {
 	const dispatch = useDispatch();
@@ -42,13 +42,13 @@ const Product = () => {
 			<div className="border-t-2 p-10 transition-opacity ease-in duration-500 opactiy-100">
 				<div className="flex gap-12 sm:gap-12 flex-col sm:flex-row">
 					<div className="flex-1 flex fllex-col-reverse gap-3 sm:flex-row">
-						<div className="flex gap-1 sm:flex-col overflow-x-auto sm:overflow-y-scroll justify-between sm:justify-normal sm:w-[20%] w-full">
+						<div className="flex gap-1 sm:flex-col overflow-x-auto sm:overflow-y-scroll no-scrollbar justify-between sm:justify-normal sm:w-[20%] w-full">
 							{product.Images.map((item, index) => {
 								return (
 									<img
 										src={item}
 										key={index}
-										className="border p-1"
+										className="border p-1 "
 										alt="productImage"
 										onClick={() => setCurrentImage(item)}
 									/>
@@ -66,20 +66,19 @@ const Product = () => {
 					<div className="flex-1">
 						<h1 className="font-medium text-3xl font-Corm">{product.Name}</h1>
 						<div className="flex items-center gap-1 mt-2">
-							<StarIcon />
-							<StarIcon />
-							<StarIcon />
-							<StarIcon />
-							<StarIcon />
-							<p>(122)</p>
-							<p>{product.ProductId}</p>
+							<StarIcon  fill="orange"/>
+							<StarIcon fill="orange"/>
+							<StarIcon fill="orange"/>
+							<StarIcon fill="orange"/>
+							<StarIcon fill="orange"/>
+							<p>{product.Rating}</p>
+							<p>({product.NumberOfReviews})</p>
 						</div>
-						<p className="mt-5 text-3xl font-medium">R {product.Price}.00</p>
-						<p className="mt-5 md:w-4/5">
-							lorem ipsum i dor sec lorem ipsum i dor seclorem ipsum i dor
-							seclorem ipsum i dor seclorem ipsum i dor seclorem ipsum i dor sec
+						<p className="mt-5 text-3xl font-medium">&#8377;{product.Price}.00</p>
+						<p className="mt-1 md:w-4/5 py-5">
+							{product.Description}
 						</p>
-						<div className="flex flex-col gap-5 my-8">
+						{/* <div className="flex flex-col gap-5 my-8">
 							<p>Select Size</p>
 							<div className="flex gap-2">
 								{productSizes.map((item, index) => (
@@ -94,7 +93,8 @@ const Product = () => {
 									</button>
 								))}
 							</div>
-						</div>
+						</div> */}
+
 						<button
 							className="bg-dark active:bg-gray-500 text-white px-8 py-3 text-sm"
 							onClick={(e) => {
@@ -106,7 +106,7 @@ const Product = () => {
 						<hr className="mt-8 sm:w-4/5" />
 						<div className="text-sm mt-5 flex flex-col gap-1">
 							<p>100% Original Product</p>
-							<p>Cash On Deliver</p>
+							<p>Cash On Delivery</p>
 							<p>Easy Replacement</p>
 						</div>
 					</div>
@@ -127,22 +127,13 @@ const Product = () => {
 								setToggleReviews(false);
 							}}
 						>
-							Reviews (122)
+							Reviews ({product.NumberOfReviews})
 						</p>
 					</div>
 					{toggleReviews ? (
 						<div className="flex flex-col gap-4 border  px-5 py-5 text-sm ">
 							<p>
-								lorem ipsum dora es lermmelorem ipsum dora es lermmelorem ipsum
-								dora lorem ipsum dora es lermmelorem ipsum dora es lermmelorem
-								ipsum dora lorem ipsum dora es lermmelorem ipsum dora es
-								lermmelorem ipsum dora
-							</p>
-							<p>
-								lorem ipsum dora es lermmelorem ipsum dora es lermmelorem ipsum
-								dora lorem ipsum dora es lermmelorem ipsum dora es lermmelorem
-								ipsum dora lorem ipsum dora es lermmelorem ipsum dora es
-								lermmelorem ipsum dora
+								{product.Description}
 							</p>
 						</div>
 					) : (

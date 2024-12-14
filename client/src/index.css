@@ -3,7 +3,10 @@
 @tailwind utilities;
 
 @layer components {
-.btn {
+  .hideScroll {
+    @apply  scrollbar-width: none -ms-overflow-style: none ;
+  }
+  .btn {
     @apply inline-flex items-center justify-center rounded-lg px-4 py-2 font-medium tracking-tight;
   }
   .btn-primary {
@@ -36,5 +39,15 @@
   }
   .icon-text {
     @apply text-center max-w-[300px] text-white pb-5
+  }
+}
+
+@layer utilities {
+  .no-scrollbar::-webkit-scrollbar {
+      display: none;
+  }
+  .no-scrollbar {
+      -ms-overflow-style: none;
+      scrollbar-width: 0;
   }
 }

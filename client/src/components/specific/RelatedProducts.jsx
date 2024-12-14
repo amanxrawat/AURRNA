@@ -14,7 +14,6 @@ const RelatedProducts = ({ type, gender, ProductId }) => {
       productCopy = productCopy.filter(
         (item) => type === item.Category && item.ProductId != ProductId,
       );
-      productCopy = productCopy.filter((item) => gender === item.Gender);
 
       setRelated(productCopy);
     }
@@ -25,7 +24,7 @@ const RelatedProducts = ({ type, gender, ProductId }) => {
         <h2 className="font-Corm text-[36px]">Related Products</h2>
       </div>
       {related.length > 0 ? (
-        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4 gap-y-5">
+        <div className="grid grid-cols-2 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 gap-y-5">
           {related.map((item, index) => {
             return (
               <Card

@@ -10,7 +10,7 @@ const Search = () => {
   const { search } = useSelector((state) => state.search);
 
   useEffect(() => {
-    console.log(search);
+    
   }, [search]);
 
   const [showFilter, setShowFilter] = useState(false);
@@ -236,7 +236,7 @@ const Search = () => {
           </select>
         </div>
         {filterProducts.length > 0 ? (
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 gap-y-6 py-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 gap-y-6 py-4">
             {filterProducts.map((item, index) => (
               <Card
                 key={index}
@@ -247,6 +247,8 @@ const Search = () => {
                 Category={item.Category}
                 Price={item.Price}
                 ProductId={item.ProductId}
+                Rating={item.Rating}
+									NoOfReviews={item.NumberOfReviews}
               />
             ))}
           </div>

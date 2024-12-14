@@ -1,46 +1,10 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { productData } from "../../../constants/sampleData";
 
 const cartSlice = createSlice({
 	name: "cart",
 	initialState: {
-		cart: [
-			{
-				product: {
-					Name: "Silver Pendant Necklace",
-					Images: [
-						"https://images.pexels.com/photos/998521/pexels-photo-998521.jpeg?auto=compress&cs=tinysrgb&w=600",
-						"https://images.pexels.com/photos/168927/pexels-photo-168927.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
-						"https://images.pexels.com/photos/691046/pexels-photo-691046.jpeg?auto=compress&cs=tinysrgb&w=600",
-						"https://images.pexels.com/photos/1302307/pexels-photo-1302307.jpeg?auto=compress&cs=tinysrgb&w=600",
-					],
-					Gender: "Female",
-					Material: "Silver",
-					Category: "Necklace",
-					Discount: 10,
-					Price: 1000,
-					ProductId: 9,
-				},
-				quantity: 1,
-			},
-			{
-				product: {
-					Name: "Kids' Silver Bracelet",
-					Images: [
-						"https://images.pexels.com/photos/998521/pexels-photo-998521.jpeg?auto=compress&cs=tinysrgb&w=600",
-						"https://images.pexels.com/photos/168927/pexels-photo-168927.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
-						"https://images.pexels.com/photos/691046/pexels-photo-691046.jpeg?auto=compress&cs=tinysrgb&w=600",
-						"https://images.pexels.com/photos/1302307/pexels-photo-1302307.jpeg?auto=compress&cs=tinysrgb&w=600",
-					],
-					Gender: "Child",
-					Material: "Silver",
-					Category: "Bracelet",
-					Discount: 10,
-					Price: 1000,
-					ProductId: 10,
-				},
-				quantity: 1,
-			},
-		],
+		cart: [],
 	},
 	reducers: {
 		addItem: (state, action) => {
@@ -48,7 +12,6 @@ const cartSlice = createSlice({
 			let notInCart = true;
 
 			cartCopy.map((item) => {
-				console.log(item.product.ProductId === action.payload.ProductId);
 				if (item.product.ProductId === action.payload.ProductId) {
 					item.quantity = item.quantity + 1;
 					state = {
@@ -70,32 +33,43 @@ const cartSlice = createSlice({
 				};
 			}
 		},
-
-		setItemQuantity: (state, action) => {
-			const cartCopy = state.cart;
-
-			cartCopy.map((item) => {
-				if (item.product.ProductId === action.payload.ProductId) {
-					item.quantity = action.payload.quantity;
+		addItemByProductId: (state, action) => {
+			const ProductId = action.payload;
+			let itemInCart = state.cart.find(item => item.product.ProductId === ProductId);
+		
+			if (itemInCart) {
+				// If the item already exists in the cart, increase its quantity
+				itemInCart.quantity += 1;
+			} else {
+				// If the item is not in the cart, find it in `productData` and add it
+				const product = productData.find(item => item.ProductId === ProductId);
+				if (product) {
+					state.cart.push({
+						product: product,
+						quantity: 1,
+					});
+				} else {
+					console.error(`Product with ID ${ProductId} not found.`);
 				}
-			});
-			state = {
-				...state,
-				cart: cartCopy,
-			};
+			}
 		},
-
-		removeItem: (state, action) => {
-			const newCart = state.cart.filter(
-				(item) => item.product.ProductId !== action.payload.ProductId,
+		
+		setItemQuantity: (state, action) => {
+			const { ProductId, quantity } = action.payload;
+		  
+			state.cart = state.cart.map((item) =>
+			  item.product.ProductId === ProductId
+				? { ...item, quantity }
+				: item
 			);
-			state = {
-				...state,
-				cart: newCart,
-			};
 		},
+		removeItemByProductId: (state, action) => {
+			state.cart = state.cart.filter(
+				(item) => item.product.ProductId !== action.payload.productId
+			);
+		},		
 	},
 });
 
 export default cartSlice;
-export const { addItem, removeItem, setItemQuantity } = cartSlice.actions;
+export const { addItem,addItemByProductId, removeItemByProductId, setItemQuantity } = cartSlice.actions;

@@ -38,9 +38,6 @@ export default function AddProductForm() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // You can submit the formData and images here
-    console.log(formData);
-    console.log(images);
   };
 
   return (

@@ -16,7 +16,7 @@ const Hero = () => {
               aurrna
             </h1>
             <p className="mt-6 pb-8 text-xl tracking-tight text-[#010d3E]">
-              where elegance shines through every piece. Explore our exquisite collection of handcrafted jewelry, designed to reflect your unique style and make every moment special.
+              Where elegance shines through every piece. Explore our exquisite collection of handcrafted jewelry, designed to reflect your unique style and make every moment special.
             </p>
           </div>
         </div>

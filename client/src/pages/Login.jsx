@@ -1,40 +1,8 @@
-import axios from "axios";
-import { useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom";
-//
-// const Login = () => {
-// 	const navigate = useNavigate();
-//
-// 	window.onpopstate = (event) => {
-// 		navigate("/");
-// 	};
-//
-// 	const dispatch = useDispatch();
-//
-// 	const handleLogin = async (e) => {
-// 		e.preventDefault();
-//
-// 		const config = {
-// 			withCredentials: true,
-// 			headers: {
-// 				"Content-Type": "application/json",
-// 			},
-// 		};
-//
-// 		try {
-// 			const { data } = await axios.post(
-// 				`${server}/api/v1/user/login`,
-// 				{ username: username.value, password: password.value },
-// 				config,
-// 			);
-// 			dispatch(userExists(true));
-// 		} catch (error) {
-// 			console.log(error);
-// 		}
-// 	};
 import React, { useRef, useState } from "react";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
+import Layout from "./../components/layout/Layout"
+
 gsap.registerPlugin(useGSAP);
 
 const Login = () => {
@@ -107,7 +75,7 @@ const Login = () => {
 
 	return (
 		<>
-			<div className=" main m-10 overflow-hidden justify-center flex items-center">
+			<div className=" main p-16 overflow-hidden justify-center flex items-center bg-purple">
 				<div className="flex bg-gradient-to-r from-[#391d59] to-[#391d59] max-w-2xl justify-between relative overflow-hidden">
 					<div className="left relative z-[3]">
 						<div className="flex items-center justify-center">
@@ -282,4 +250,4 @@ const Login = () => {
 	);
 };
 
-export default Login;
+export default Layout()(Login);
