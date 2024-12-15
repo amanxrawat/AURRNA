@@ -59,8 +59,8 @@ const Contact = () => {
 		<>
 			<div id="contact" className="">
 				<div className="">
-					<h1 className="section-heading">Contact Us</h1>
-					<div className="flex flex-row">
+					<h1 className="section-heading text-center border-b mb-5">Contact Us</h1>
+					<div className="flex flex-row justify-evenly">
 						<div className="md:w-[50%] w-full flex flex-col gap-4 px-10 max-w-xl">
 							<p className="">We’d love to hear from you!</p>
 							<p className="">

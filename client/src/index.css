@@ -29,7 +29,7 @@
     @apply text-center max-w-xl justify-center text-[22px] leading-[30px] tracking-tight text-dark;
   }
   .section-heading {
-    @apply font-Corm text-5xl pt-4 pb-8 text-dark;
+    @apply font-Corm text-5xl pt-4 pb-8 text-dark uppercase;
   }
   .card {
     @apply w-full max-w-xs rounded-3xl border border-[#F1F1F1] p-10 shadow-[0_7px_14px_#EAEAEA];

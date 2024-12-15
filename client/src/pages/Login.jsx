@@ -45,7 +45,7 @@ const Login = () => {
 		});
 
 		gsap.to(circleRef.current, {
-			x: -80,
+			x: -50,
 			duration: 2.5,
 		});
 
@@ -237,7 +237,7 @@ const Login = () => {
 								</div>
 								<div className=" flex flex-col translate-x-0 items-center ">
 									<h1 className="text-2xl font-bold text-black">Aurrna</h1>
-									<h1 className="text-xl font-semibold text-black translate-x-4">
+									<h1 className="text-xl font-semibold text-black">
 										Your Jewellery Destination
 									</h1>
 								</div>

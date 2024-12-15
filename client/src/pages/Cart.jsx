@@ -85,7 +85,7 @@ const Cart = () => {
       </div>
   
       {/* Summary Section */}
-      <div className="w-full md:w-[30%] mx-auto border-x h-80">
+      <div className="w-full md:w-[30%] mx-auto border h-80">
         <h2 className="section-title text-2xl pb-5 bg-dark text-white ">Summary</h2>
         <div className="border-t  px-10 pt-5">
           <div className="flex justify-between py-2">
@@ -94,13 +94,16 @@ const Cart = () => {
           </div>
           <div className="flex justify-between py-2">
             <span>Shipping</span>
-            <span>
+            <span>&#8377;
             {shippingCost}
             </span>
           </div>
           <div className="flex justify-between py-2 font-bold">
             <span>Total</span>
             <span>&#8377;{(cart.reduce((sum, item) => sum + item.quantity * item.product.Price, 0) + shippingCost).toFixed(2)}</span>
+          </div>
+          <div className="flex justify-between py-12 font-bold">
+            <button className="border bg-dark mx-auto text-white py-3 px-10"> Checkout</button>
           </div>
         </div>
       </div>
