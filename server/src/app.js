@@ -1,7 +1,10 @@
 import express from 'express';
 import cookieParser from 'cookie-Parser'
 import cors from 'cors';
+
+
 const app = express();
+
 
 app.use(cors({
     origin:process.env.CORS_ORIGIN,
@@ -22,6 +25,9 @@ app.use("/api/user", userRouter)
 
 // product routing for creating and fetching products data
 import productRouter from "./routes/product.router.js"
-app.use("api/product",productRouter)
+app.use("/api/product",productRouter)
+
+import delhiveryRouter from "./routes/delhivery.router.js"
+app.use("/api/delhivery",delhiveryRouter)
 
 export {app}
