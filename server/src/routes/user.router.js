@@ -1,9 +1,16 @@
 import { Router } from "express";
-import {upload} from "../middlewares/multer.middlerware.js"
+import {
+	registerUser,
+	loginUser,
+	logoutUser,
+	deleteUser,
+} from "../controllers/user.controller.js";
 
 const router = Router();
 
-router.route('/register').post()
-router.route('')
+router.route("/register").post(registerUser);
+router.route("/login").post(loginUser);
+router.route("/logout").post(logoutUser);
+router.route("/deleteUser/:user_id").delete(deleteUser);
 
-export default router
+export default router;
