@@ -7,6 +7,7 @@ import { TbShoppingCartPlus as CartIcon } from "react-icons/tb";
 
 import { useDispatch, useSelector } from "react-redux";
 import { addItem, addItemByProductId } from "../../redux/features/cart/cartSlice";
+import ReviewStars from "../shared/Stars";
 
 const Card = ({
 	Name,
@@ -33,7 +34,7 @@ const Card = ({
 			<div className="rounded-lg border border-gray-200 bg-white p-6 shadow-sm ">
 				<div className="h-56 w-full">
 					<Link to={`/product/${ProductId}`}>
-						<img className="mx-auto h-full " src={Images[0]} alt="Jewlery Image " />
+						<img className="mx-auto h-full w-full object-center " src={Images} alt="Jewlery Image " onClick={()=>{window.scrollTo({ top: 0, behavior: "smooth" });}} />
 					</Link>
 				</div>
 				<div className="pt-6">
@@ -41,15 +42,13 @@ const Card = ({
 						<span className="me-2 rounded bg-dark px-2.5 py-2 text-xs font-medium text-white"> Up to 40% off </span>
 					</div>
 
-					<Link to={`/product/${ProductId}`} className="text-lg font-semibold leading-tight text-gray-900 hover:underline">
+					<Link to={`/product/${ProductId}`} onClick={()=>{window.scrollTo({ top: 0, behavior: "smooth" });}} className="text-lg font-semibold leading-tight text-gray-900 hover:underline">
 						{Name}</Link>
 
 					<div className="mt-2 flex items-center gap-2">
 						<div className="flex items-center">
 							{
-								new Array(5).fill(1).map((_, index) => (
-									<StarIcon key={index} fill="orange" />
-								))
+								<ReviewStars rating={5} />
 							}
 						</div>
 						<p className="text-sm font-medium text-gray-900 ">{Rating}</p>

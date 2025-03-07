@@ -1,31 +1,19 @@
 import { Router } from "express";
-import { upload } from "../middlewares/multer.middlerware.js"
-import { productReview, createProduct } from '../controllers/product.controller.js'
+import {upload} from "../middlewares/multer.middlerware.js"
+import { productReview,  getAllProducts,getSingleProduct, check ,createProduct , updateProduct} from '../controllers/product.controller.js'
 
 const router = Router();
 
-router.route('/create').post(
-    upload.fields([
-        {
-            name: 'productImage1',
-            maxCount: 1
-        },
-        {
-            name: 'productImage2',
-            maxCount: 1
-        },
-        {
-            name: 'productImage3',
-            maxCount: 1
-        },
-        {
-            name: 'productImage4',
-            maxCount: 1
-        },
-    ]),
-    createProduct)
+router.route('/create').post(upload.array("images", 6),createProduct);
+router.route('/all').get(getAllProducts);
 
+
+router.get('/:product_id', getSingleProduct);
 
 router.route('/:user_id/:product_id/review').post(productReview)
+router.route("/update").put(updateProduct)
+router.route("/delete").delete()
 
+
+router.route('/check').get(check);
 export default router

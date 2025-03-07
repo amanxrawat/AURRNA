@@ -36,6 +36,8 @@ const RelatedProducts = ({ type, gender, ProductId }) => {
                 Category={item.Category}
                 Price={item.Price}
                 ProductId={item.ProductId}
+                Rating={item.Rating}
+                NumberOfReviews={item.NumberOfReviews}
               />
             );
           })}

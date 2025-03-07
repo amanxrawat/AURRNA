@@ -3,14 +3,23 @@ import React, { useEffect, useState } from "react";
 import { MdDeleteOutline as DeleteIcon } from "react-icons/md";
 
 import { useDispatch, useSelector } from "react-redux";
-import { setItemQuantity, removeItemByProductId } from "./../redux/features/cart/cartSlice.js";
+import {
+  setItemQuantity,
+  removeItemByProductId,
+} from "./../redux/features/cart/cartSlice.js";
 
-import Layout from "../components/layout/Layout"; 
+import Layout from "../components/layout/Layout";
+import { twMerge } from "tailwind-merge";
+import { Link } from "react-router-dom";
+
+import { useNavigate } from "react-router-dom";
 
 const Cart = () => {
+  const navigate = useNavigate();
   const dispatch = useDispatch();
+
   const setQuantity = (ProductId, quantity) => {
-    console.log(quantity,ProductId)
+    console.log(quantity, ProductId);
     if (quantity !== "") {
       dispatch(setItemQuantity({ ProductId: ProductId, quantity: quantity }));
     }
@@ -18,97 +27,141 @@ const Cart = () => {
 
   const RemoveItem = (productId) => {
     console.log(productId);
-    dispatch(removeItemByProductId({productId : productId}));
-  }
+    dispatch(removeItemByProductId({ productId: productId }));
+  };
 
   const { cart } = useSelector((state) => state.cart);
-  const [shippingCost, setShippingCost] = useState(0.00)
+  const [shippingCost, setShippingCost] = useState(0.0);
 
   useEffect(() => {
     console.log(cart);
-    cart.length > 0 ? setShippingCost(100.00) :  setShippingCost(0.00); 
+    cart.length > 0 ? setShippingCost(100.0) : setShippingCost(0.0);
   }, [cart]);
 
   return (
     <div className="container mx-auto pb-12">
-    <h2 className="section-heading px-10 uppercase">Shopping Cart</h2>
-    <div className=" my-2"></div>
-    <div className="flex flex-row flex-wrap gap-4">
-      {/* Cart Items Section */}
-      <div className="w-full md:w-[60%]  mx-auto border ">
-        <h2 className="section-title text-4xl  bg-dark text-white border mb-4 py-5 w-full">Items In Cart</h2>
-        <div className="flex flex-col gap-5 px-10 pb-10">
-          {/* Table Header */}
-          <div className="grid grid-cols-5 text-center font-semibold border-b pb-2 uppercase text-sm text-gray-600">
-            <div className="min-w-[200px]">Product Details</div>
-            <div className="min-w-[100px]">Price</div>
-            <div className="min-w-[100px]">Quantity</div>
-            <div className="min-w-[100px]">Total</div>
-            <div className="min-w-[100px]">Remove</div>
-          </div>
-  
-          {/* Cart Items */}
-          {cart.length > 0 ? (
-            cart.map((item, index) => (
-              <div
-                key={item.product.id || index}
-                className="grid grid-cols-5 text-center items-center border-y py-4"
-              >
-                <div className="min-w-[200px] flex items-center">
-                  <img src={item.product.Images[0]} className="h-16"/><p>{item.product.Name}</p></div>
-                <div className="min-w-[100px]">&#8377;{item.product.Price.toFixed(2)}</div>
-                <div className="min-w-[100px]">
-                  <input 
-                  min={1} 
-                  type="number" 
-                  className="w-12 pl-auto text-center border" 
-                  defaultValue={item.quantity} 
-                  onChange={(e)=>{setQuantity(item.product.ProductId,e.target.value)}
-                  }/>
-                </div>
-                <div className="min-w-[100px]">
-                &#8377;{(item.quantity * item.product.Price).toFixed(2)}
-                </div>
-                <div className="min-w-[100px]">
-                <motion.button onClick={()=>RemoveItem(item.product.ProductId)} whileHover={{scale:1.1}} className="border">
-                    <DeleteIcon fill="#ff5430" className="m-2" size={24}/>
-                  </motion.button>
-                </div>
-              </div>
-            ))
-          ) : (
-            <div className="text-center text-gray-600 py-5">
-              Your cart is empty. Start shopping now!
+      <h2 className="section-heading px-10 uppercase">Shopping Cart</h2>
+      <div className="my-2"></div>
+      <div className="flex flex-row flex-wrap gap-4">
+        {/* Cart Items Section */}
+        <div className="mx-auto w-full border md:w-[60%]">
+          <h2 className="section-title mb-4 w-full border bg-dark py-5 text-4xl text-white">
+            Items In Cart
+          </h2>
+          <div className="flex flex-col gap-5 px-10 pb-10">
+            {/* Table Header */}
+            <div className="grid grid-cols-5 border-b pb-2 text-center text-sm font-semibold uppercase text-gray-600">
+              <div className="min-w-[200px]">Product Details</div>
+              <div className="min-w-[100px]">Price</div>
+              <div className="min-w-[100px]">Quantity</div>
+              <div className="min-w-[100px]">Total</div>
+              <div className="min-w-[100px]">Remove</div>
             </div>
-          )}
+
+            {/* Cart Items */}
+            {cart.length > 0 ? (
+              cart.map((item, index) => (
+                <div
+                  key={item.product.id || index}
+                  className="grid grid-cols-5 items-center border-y py-4 text-center"
+                >
+                  <div className="flex min-w-[200px] items-center">
+                    <img src={item.product.Images[0]} className="h-16" />
+                    <p>{item.product.Name}</p>
+                  </div>
+                  <div className="min-w-[100px]">
+                    &#8377;{item.product.Price.toFixed(2)}
+                  </div>
+                  <div className="min-w-[100px]">
+                    <input
+                      min={1}
+                      type="number"
+                      className="pl-auto w-12 border text-center"
+                      defaultValue={item.quantity}
+                      onChange={(e) => {
+                        setQuantity(item.product.ProductId, e.target.value);
+                      }}
+                    />
+                  </div>
+                  <div className="min-w-[100px]">
+                    &#8377;{(item.quantity * item.product.Price).toFixed(2)}
+                  </div>
+                  <div className="min-w-[100px]">
+                    <motion.button
+                      onClick={() => RemoveItem(item.product.ProductId)}
+                      whileHover={{ scale: 1.1 }}
+                      className="border"
+                    >
+                      <DeleteIcon fill="#ff5430" className="m-2" size={24} />
+                    </motion.button>
+                  </div>
+                </div>
+              ))
+            ) : (
+              <div className="py-5 text-center text-gray-600">
+                Your cart is empty. Start shopping now!
+              </div>
+            )}
+          </div>
         </div>
-      </div>
-  
-      {/* Summary Section */}
-      <div className="w-full md:w-[30%] mx-auto border h-80">
-        <h2 className="section-title text-2xl pb-5 bg-dark text-white ">Summary</h2>
-        <div className="border-t  px-10 pt-5">
-          <div className="flex justify-between py-2">
-            <span>Subtotal</span>
-            <span>&#8377;{cart.reduce((sum, item) => sum + item.quantity * item.product.Price, 0).toFixed(2)}</span>
-          </div>
-          <div className="flex justify-between py-2">
-            <span>Shipping</span>
-            <span>&#8377;
-            {shippingCost}
-            </span>
-          </div>
-          <div className="flex justify-between py-2 font-bold">
-            <span>Total</span>
-            <span>&#8377;{(cart.reduce((sum, item) => sum + item.quantity * item.product.Price, 0) + shippingCost).toFixed(2)}</span>
-          </div>
-          <div className="flex justify-between py-12 font-bold">
-            <button className="border bg-dark mx-auto text-white py-3 px-10"> Checkout</button>
+
+        {/* Summary Section */}
+        <div className="mx-auto h-80 w-full border md:w-[30%]">
+          <h2 className="section-title bg-dark pb-5 text-2xl text-white">
+            Summary
+          </h2>
+          <div className="border-t px-10 pt-5">
+            <div className="flex justify-between py-2">
+              <span>Subtotal</span>
+              <span>
+                &#8377;
+                {cart
+                  .reduce(
+                    (sum, item) => sum + item.quantity * item.product.Price,
+                    0,
+                  )
+                  .toFixed(2)}
+              </span>
+            </div>
+            <div className="flex justify-between py-2">
+              <span>Shipping</span>
+              <span>
+                &#8377;
+                {shippingCost}
+              </span>
+            </div>
+            <div className="flex justify-between py-2 font-bold">
+              <span>Total</span>
+              <span>
+                &#8377;
+                {(
+                  cart.reduce(
+                    (sum, item) => sum + item.quantity * item.product.Price,
+                    0,
+                  ) + shippingCost
+                ).toFixed(2)}
+              </span>
+            </div>
+            <div className="flex justify-between py-12 font-bold">
+              <button
+                className={twMerge(
+                  "mx-auto border bg-dark px-10 py-3 text-white",
+                  cart.length > 0
+                    ? "opacity-100"
+                    : "cursor-not-allowed bg-gray-800 opacity-50",
+                )}
+                disabled={cart.length <= 0}
+                onClick={() => {
+                  navigate("/checkout");
+                }}
+              >
+                Checkout
+              </button>
+            </div>
           </div>
         </div>
       </div>
     </div>
-  </div>
   );
 };
 

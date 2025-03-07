@@ -76,6 +76,7 @@ const Carousel = () => {
                     to={item.link}
                     onClick={() => {
                       dispatch(setSearch(item.text));
+                      
                     }}
                   >
                     <motion.img
@@ -88,7 +89,7 @@ const Carousel = () => {
                 </div>
                 <div>
                   <h1 className="font-Corm text-center uppercase text-2xl">
-                    {item.text}
+                  <Link to="/search">{item.text}</Link>
                   </h1>
                 </div>
               </div>
@@ -118,9 +119,10 @@ const Carousel = () => {
                 </div>
                 <div>
                   <h1 className="font-Corm text-center uppercase text-2xl">
-                    {item.text}
+                    <Link to="/search">{item.text}</Link>
                   </h1>
                 </div>
+
               </div>
             ))}
           </motion.div>

@@ -11,7 +11,7 @@ const Profile = () => {
      <div className='grid grid-cols-3 md:grid-rows-2 py-12'>
       <div className='col-span-1 md:grid-row-1 p-2 border m-4'><div className='flex flex-col'>
         <div className='mx-auto'>
-          <img src='./../../public/Images/Profile.jpg' className='border rounded-full h-24 w-24 mx-auto my-8' />
+          <img src='/Images/Profile.jpg' className='border rounded-full h-24 w-24 mx-auto my-8' />
           <div className=''>
             <div> Name :  {sampleUser.Name}</div>
             <div> Email : {sampleUser.Email}</div>

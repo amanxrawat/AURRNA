@@ -17,6 +17,7 @@ const Cart = lazy(() => import("./pages/Cart"));
 const Contact = lazy(() => import("./pages/Contact"));
 const About = lazy(() => import("./pages/About"));
 const Product = lazy(() => import("./pages/Product"));
+const Checkout = lazy(() => import("./pages/Checkout"));
 
 const App = () => {
 	const { user } = useSelector((state) => state.auth);
@@ -40,6 +41,7 @@ const App = () => {
 					<Route path="/cart" element={<Cart />} />
 					<Route path="/contact" element={<Contact />} />
 					<Route path="/about" element={<About />} />
+					<Route path="/checkout" element={<Checkout />} />
 					<Route path="/product/:productId" element={<Product />} />
           {/* <Route path="/admin" element={<Sidebar/>} /> */}
 					<Route element={<ProtectedRoutes />}>

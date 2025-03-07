@@ -1,24 +1,31 @@
+import { twMerge } from "tailwind-merge";
+import { useSelector } from "react-redux";
+import { useQuery } from "@tanstack/react-query";
+import axios from "axios";
+
 import React, { useEffect, useState } from "react";
 import Trending from "./../components/specific/Trending";
 import Card from "./../components/specific/Card";
-import { twMerge } from "tailwind-merge";
 import Layout from "../components/layout/Layout";
-import { productData } from "../constants/sampleData";
-import { useSelector } from "react-redux";
+import { fetchProducts } from "../api/api";
 
 const Search = () => {
   const { search } = useSelector((state) => state.search);
 
-  useEffect(() => {
-    
-  }, [search]);
+  const { data, isLoading, isError } = useQuery({
+    queryKey: ["products"],
+    queryFn: fetchProducts,
+  });
+
+  const productData = data?.data || [];
+
+  console.log("productData : ", productData);
 
   const [showFilter, setShowFilter] = useState(false);
   const [filterProducts, setFilterProducts] = useState([]);
   const [category, setCategory] = useState([]);
   const [material, setMaterial] = useState([]);
   const [type, setType] = useState([]);
-
   const [sortType, setSortType] = useState("relevent");
 
   const toggleCategory = (e) => {
@@ -28,7 +35,6 @@ const Search = () => {
       setCategory((prev) => [...prev, e.target.value], e.target.value);
     }
   };
-
   const toggleMaterial = (e) => {
     if (material.includes(e.target.value)) {
       setMaterial((prev) => prev.filter((item) => item !== e.target.value));
@@ -44,32 +50,33 @@ const Search = () => {
     }
   };
 
-  const applyFilter = () => {
-    let productsCopy = productData.slice();
+  const applyFilter = async () => {
+    let productsCopy = productData?.slice() || [];
 
-    if (search.length > 0) {
+    if (productsCopy.length > 0) {
       productsCopy = productsCopy.filter((item) => {
-        return item.Name.toLowerCase().includes(search.toLowerCase());
+        return item.name.toLowerCase().includes(search.toLowerCase());
       });
     }
-    if (category.length > 0) {
-      productsCopy = productsCopy.filter((item) =>
-        category.includes(item.Gender),
-      );
-    }
-    if (material.length > 0) {
-      productsCopy = productsCopy.filter((item) =>
-        material.includes(item.Material),
-      );
-    }
-    if (type.length > 0) {
-      productsCopy = productsCopy.filter((item) =>
-        type.includes(item.Category),
-      );
-    }
-
-    setFilterProducts(productsCopy);
   };
+
+  if (category.length > 0) {
+    productsCopy = productsCopy.filter((item) =>
+      category.includes(item.Gender),
+    );
+  }
+
+  if (material.length > 0) {
+    productsCopy = productsCopy.filter((item) =>
+      material.includes(item.material),
+    );
+  }
+  if (type.length > 0) {
+    productsCopy = productsCopy.filter((item) =>
+      type.includes(item.categories[0]),
+    );
+    setFilterProducts(productsCopy);
+  }
 
   const sortProduct = () => {
     let filterProductsCopy = filterProducts.slice();
@@ -94,20 +101,24 @@ const Search = () => {
     sortProduct();
   }, [sortType]);
 
+  useEffect(() => {
+    setFilterProducts(productData);
+  }, [productData]);
+
   return (
-    <div className="flex flex-col sm:flex-row gap-1 sm:gap-10 pt-10 border-t px-10">
+    <div className="flex flex-col gap-1 border-t px-10 pt-10 sm:flex-row sm:gap-10">
       <div className="min-w-40 pb-10">
-        <p className="my-2 text-2xl flex items-center cursor-pointer gap-2 uppercase pl-1 font-Corm">
+        <p className="my-2 flex cursor-pointer items-center gap-2 pl-1 font-Corm text-2xl uppercase">
           filter
         </p>
         <div
           className={twMerge(
-            "border pl-5 py-3 m-1",
+            "m-1 border py-3 pl-5",
             !showFilter ? "" : "hidden",
           )}
         >
-          <p className=" text-xl font-medium pb-2 font-Corm ">Gender</p>
-          <div className="flex flex-col gap-2 text-sm text-dark ">
+          <p className="pb-2 font-Corm text-xl font-medium">Gender</p>
+          <div className="flex flex-col gap-2 text-sm text-dark">
             <p className="flex gap-2">
               <input
                 className="w-3"
@@ -139,12 +150,12 @@ const Search = () => {
         </div>
         <div
           className={twMerge(
-            "border pl-5 py-3 m-1 ",
+            "m-1 border py-3 pl-5",
             !showFilter ? "" : "hidden",
           )}
         >
-          <p className=" text-xl font-medium pb-2 font-Corm">Material</p>
-          <div className="flex flex-col gap-2 text-sm text-dark ">
+          <p className="pb-2 font-Corm text-xl font-medium">Material</p>
+          <div className="flex flex-col gap-2 text-sm text-dark">
             <p className="flex gap-2">
               <input
                 className="w-3"
@@ -167,12 +178,12 @@ const Search = () => {
         </div>
         <div
           className={twMerge(
-            "border pl-5 py-3 m-1 ",
+            "m-1 border py-3 pl-5",
             !showFilter ? "" : "hidden",
           )}
         >
-          <p className=" text-xl font-medium pb-2 font-Corm">Type</p>
-          <div className="flex flex-col gap-2 text-sm text-dark ">
+          <p className="pb-2 font-Corm text-xl font-medium">Type</p>
+          <div className="flex flex-col gap-2 text-sm text-dark">
             <p className="flex gap-2">
               <input
                 className="w-3"
@@ -222,10 +233,10 @@ const Search = () => {
         </div>
       </div>
       <div className="flex-1">
-        <div className="flex justify-between text-base sm:text-2xl mb-4">
+        <div className="mb-4 flex justify-between text-base sm:text-2xl">
           <h1 className="font-Corm uppercase">our products</h1>
           <select
-            className="border-2 text-sm px-2"
+            className="border-2 px-2 text-sm"
             onChange={(e) => {
               setSortType(e.target.value);
             }}
@@ -236,26 +247,28 @@ const Search = () => {
           </select>
         </div>
         {filterProducts.length > 0 ? (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 gap-y-6 py-4">
-            {filterProducts.map((item, index) => (
+          <div>
+            <div className="grid grid-cols-1 gap-4 gap-y-6 py-4 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+            {filterProducts?.map((item, index) => (
               <Card
                 key={index}
-                Name={item.Name}
-                Images={item.Images}
-                Gender={item.Gender}
-                Material={item.Material}
-                Category={item.Category}
-                Price={item.Price}
-                ProductId={item.ProductId}
-                Rating={item.Rating}
-									NoOfReviews={item.NumberOfReviews}
+                Name={item.name}
+                Images={item.images[0]}
+                Gender={"Something"}
+                Material={item.material}
+                Category={item.categories[0]}
+                Price={item.price}
+                ProductId={item._id}
+                Rating={item.ratings}
+                NoOfReviews={item.numReviews}
               />
             ))}
           </div>
+          </div>
         ) : (
           <div>
-            <h1 className="lowercase">
-              we dont have that right now, would you like to search for
+            <h1>
+              We dont have that right now, would you like to search for
               something else like :{" "}
             </h1>
             <Trending className={"py-1"} width={"w-48"} />
