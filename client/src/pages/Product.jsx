@@ -133,13 +133,13 @@ const Product = () => {
             </div>
           ) : (
             <div className="flex flex-col gap-4 border px-5 py-5 text-sm">
-              <ReviewSection/>
+              <ReviewSection />
             </div>
           )}
         </div>
       </div>
       <RelatedProducts
-        type={product.Category}
+        type={product.categories}
         // gender={product.Gender}
         ProductId={product._id}
       />
