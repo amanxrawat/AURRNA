@@ -1,6 +1,7 @@
 import mongoose from "mongoose";
 const { Schema } = mongoose;
 
+
 const addressSchema = new Schema({
     fullName: {
         type: String,
@@ -8,17 +9,12 @@ const addressSchema = new Schema({
         trim:true,
         lowercase:true,
     },
-    mobileNumber: {
+    phone: {
         type: String,
         required: true,
         trim:true,
     },
-    pinCode: {
-        type: String,
-        required: true,
-        trim:true,
-    },
-    locality: {
+    postalCode: {
         type: String,
         required: true,
         trim:true,
@@ -38,14 +34,13 @@ const addressSchema = new Schema({
         required: true,
         trim:true,
     },
-    landmark: {
-        type: String,
-        trim:true,
-    },
+    
     alternatePhone: {
         type: String,
         trim:true,
+        required: false,
     },
+
     addressType: {
         type: String,
         enum: ['home', 'work'],
@@ -54,3 +49,5 @@ const addressSchema = new Schema({
 },{timestamps:true});
 
 const Address = mongoose.model('Address', addressSchema);
+
+export { Address };

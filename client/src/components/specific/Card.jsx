@@ -14,7 +14,7 @@ const Card = ({
 }) => {
 	const dispatch = useDispatch();
 	const { cart } = useSelector((state) => state.cart);
-	
+
 
 	const handleCart = (product) => {
 		dispatch(addItem({ product }));
@@ -26,7 +26,7 @@ const Card = ({
 			<div className="rounded-lg border border-gray-200 bg-white p-6 shadow-sm ">
 				<div className="h-56 w-full">
 					<Link to={`/product/${product._id}`}>
-						<img className="mx-auto h-full w-full object-center " src={product.images[0]} alt="Jewlery Image " onClick={()=>{window.scrollTo({ top: 0, behavior: "smooth" });}} />
+						<img className="mx-auto h-full w-full object-center " src={product.images[0]} alt="Jewlery Image " onClick={() => { window.scrollTo({ top: 0, behavior: "smooth" }); }} />
 					</Link>
 				</div>
 				<div className="pt-6">
@@ -34,7 +34,7 @@ const Card = ({
 						<span className="me-2 rounded bg-dark px-2.5 py-2 text-xs font-medium text-white"> Up to 40% off </span>
 					</div>
 
-					<Link to={`/product/${product._id}`} onClick={()=>{window.scrollTo({ top: 0, behavior: "smooth" });}} className="text-lg font-semibold leading-tight text-gray-900 hover:underline">
+					<Link to={`/product/${product._id}`} onClick={() => { window.scrollTo({ top: 0, behavior: "smooth" }); }} className="text-lg font-semibold leading-tight text-gray-900 hover:underline">
 						{product.name}</Link>
 
 					<div className="mt-2 flex items-center gap-2">
@@ -60,8 +60,13 @@ const Card = ({
 					</ul>
 
 					<div className="mt-4 flex items-center justify-between gap-4">
-						<p className="text-2xl font-extrabold leading-tight text-gray-900 ">&#8377;{product.price}</p>
+						<div className="flex-col items-center gap-2 flex-wrap">
+							<p className="text-2xl font-extrabold leading-tight text-gray-900 ">&#8377;{product.price}</p>
+							<div className="m-1 line-through">
+								<p className="font-extrabold leading-tight text-gray-500 text-sm ">&#8377;{product.price * 1.2.toFixed(2)}</p>
+							</div>
 
+						</div>
 						<button
 							onClick={(e) => {
 								handleCart(product);
@@ -70,6 +75,8 @@ const Card = ({
 							<CartIcon size={20} className="mx-2" />
 							Add to cart
 						</button>
+
+
 					</div>
 				</div>
 			</div>

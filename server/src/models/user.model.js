@@ -35,6 +35,8 @@ const userSchema = new Schema({
 
     orders: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Order'  , default:""}],
 
+    coupons: [{ type: String ,
+         default:""}],
 
 },{timestamps:true});
 

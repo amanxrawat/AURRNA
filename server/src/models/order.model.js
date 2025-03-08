@@ -1,6 +1,9 @@
 import mongoose from "mongoose";
 import { Schema } from "mongoose";
 
+import mongoose from "mongoose";
+import { Schema } from "mongoose";
+
 const orderSchema = new Schema({
     user: {
         type: mongoose.Schema.Types.ObjectId,
@@ -39,7 +42,17 @@ const orderSchema = new Schema({
         type: Number,
         required: true,
     },
-},{timestamps:true});
+    waybill: {
+        type: String, // Waybill should be a string
+        required: true,
+    },
+    shippingLabel: {
+        type: String, 
+        required: false,
+    }
+}, { timestamps: true });
 
 const Order = mongoose.model('Order', orderSchema);
-export {Order}
+export { Order };
+
+
