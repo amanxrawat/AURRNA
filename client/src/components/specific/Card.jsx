@@ -6,35 +6,27 @@ import { PiMoneyFill as DollarIcon } from "react-icons/pi";
 import { TbShoppingCartPlus as CartIcon } from "react-icons/tb";
 
 import { useDispatch, useSelector } from "react-redux";
-import { addItem, addItemByProductId } from "../../redux/features/cart/cartSlice";
+import { addItem } from "../../redux/features/cart/cartSlice";
 import ReviewStars from "../shared/Stars";
 
 const Card = ({
-	Name,
-	Images,
-	Gender,
-	Material,
-	Category,
-	Price,
-	ProductId,
-	Rating,
-	NoOfReviews
+	product
 }) => {
 	const dispatch = useDispatch();
 	const { cart } = useSelector((state) => state.cart);
+	
 
-	const handleCart = (productId) => {
-		dispatch(addItemByProductId(productId));
+	const handleCart = (product) => {
+		dispatch(addItem({ product }));
 	};
-
 
 	return (
 
 		<div>
 			<div className="rounded-lg border border-gray-200 bg-white p-6 shadow-sm ">
 				<div className="h-56 w-full">
-					<Link to={`/product/${ProductId}`}>
-						<img className="mx-auto h-full w-full object-center " src={Images} alt="Jewlery Image " onClick={()=>{window.scrollTo({ top: 0, behavior: "smooth" });}} />
+					<Link to={`/product/${product._id}`}>
+						<img className="mx-auto h-full w-full object-center " src={product.images[0]} alt="Jewlery Image " onClick={()=>{window.scrollTo({ top: 0, behavior: "smooth" });}} />
 					</Link>
 				</div>
 				<div className="pt-6">
@@ -42,8 +34,8 @@ const Card = ({
 						<span className="me-2 rounded bg-dark px-2.5 py-2 text-xs font-medium text-white"> Up to 40% off </span>
 					</div>
 
-					<Link to={`/product/${ProductId}`} onClick={()=>{window.scrollTo({ top: 0, behavior: "smooth" });}} className="text-lg font-semibold leading-tight text-gray-900 hover:underline">
-						{Name}</Link>
+					<Link to={`/product/${product._id}`} onClick={()=>{window.scrollTo({ top: 0, behavior: "smooth" });}} className="text-lg font-semibold leading-tight text-gray-900 hover:underline">
+						{product.name}</Link>
 
 					<div className="mt-2 flex items-center gap-2">
 						<div className="flex items-center">
@@ -51,8 +43,8 @@ const Card = ({
 								<ReviewStars rating={5} />
 							}
 						</div>
-						<p className="text-sm font-medium text-gray-900 ">{Rating}</p>
-						<p className="text-sm font-medium text-gray-500 ">({NoOfReviews})</p>
+						<p className="text-sm font-medium text-gray-900 ">{product.ratings}</p>
+						<p className="text-sm font-medium text-gray-500 ">({product.NumReviews})</p>
 					</div>
 
 					<ul className="mt-2 flex items-center gap-4">
@@ -68,11 +60,11 @@ const Card = ({
 					</ul>
 
 					<div className="mt-4 flex items-center justify-between gap-4">
-						<p className="text-2xl font-extrabold leading-tight text-gray-900 ">&#8377;{Price}</p>
+						<p className="text-2xl font-extrabold leading-tight text-gray-900 ">&#8377;{product.price}</p>
 
 						<button
 							onClick={(e) => {
-								handleCart(ProductId);
+								handleCart(product);
 							}}
 							type="button" className="inline-flex items-center rounded-lg bg-dark px-5 py-2.5 text-sm font-medium text-white hover:bg-purple focus:outline-none focus:ring-2 focus:ring-dark  ">
 							<CartIcon size={20} className="mx-2" />

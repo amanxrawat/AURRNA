@@ -1,4 +1,4 @@
-import { asyncHandler } from "./asyncHandler";
+import { asyncHandler } from "./asyncHandler.js";
 
 const isAdmin = asyncHandler(async(user)=>{
 

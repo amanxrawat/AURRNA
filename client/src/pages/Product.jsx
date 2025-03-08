@@ -140,8 +140,8 @@ const Product = () => {
       </div>
       <RelatedProducts
         type={product.Category}
-        gender={product.Gender}
-        ProductId={product.ProductId}
+        // gender={product.Gender}
+        ProductId={product._id}
       />
     </div>
   );

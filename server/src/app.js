@@ -31,4 +31,8 @@ app.use("/api/delhivery", delhiveryRouter);
 import reviewRouter from "./routes/review.router.js";
 app.use("/api/review", reviewRouter);
 
+// cart routing for creating , adding , removing and fetching user cart data
+import cartRouter from "./routes/cart.router.js";
+app.use("/api/cart", cartRouter);
+
 export { app };

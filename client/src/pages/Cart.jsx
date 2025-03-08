@@ -10,23 +10,21 @@ import {
 
 import Layout from "../components/layout/Layout";
 import { twMerge } from "tailwind-merge";
-import { Link } from "react-router-dom";
 
 import { useNavigate } from "react-router-dom";
 
 const Cart = () => {
+
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
   const setQuantity = (ProductId, quantity) => {
-    console.log(quantity, ProductId);
     if (quantity !== "") {
       dispatch(setItemQuantity({ ProductId: ProductId, quantity: quantity }));
     }
   };
 
   const RemoveItem = (productId) => {
-    console.log(productId);
     dispatch(removeItemByProductId({ productId: productId }));
   };
 
@@ -34,9 +32,10 @@ const Cart = () => {
   const [shippingCost, setShippingCost] = useState(0.0);
 
   useEffect(() => {
-    console.log(cart);
+    console.log("Cart:", cart);
     cart.length > 0 ? setShippingCost(100.0) : setShippingCost(0.0);
   }, [cart]);
+
 
   return (
     <div className="container mx-auto pb-12">
@@ -60,17 +59,18 @@ const Cart = () => {
 
             {/* Cart Items */}
             {cart.length > 0 ? (
-              cart.map((item, index) => (
+              cart.map((item, index) =>
+              (
                 <div
-                  key={item.product.id || index}
+                  key={item.product._id || index}
                   className="grid grid-cols-5 items-center border-y py-4 text-center"
                 >
                   <div className="flex min-w-[200px] items-center">
-                    <img src={item.product.Images[0]} className="h-16" />
-                    <p>{item.product.Name}</p>
+                    <img src={item.product.images[0]} className="h-16" />
+                    <p>{item.product.name}</p>
                   </div>
                   <div className="min-w-[100px]">
-                    &#8377;{item.product.Price.toFixed(2)}
+                    &#8377;{parseInt(item.product.price) || 0}
                   </div>
                   <div className="min-w-[100px]">
                     <input
@@ -79,16 +79,16 @@ const Cart = () => {
                       className="pl-auto w-12 border text-center"
                       defaultValue={item.quantity}
                       onChange={(e) => {
-                        setQuantity(item.product.ProductId, e.target.value);
+                        setQuantity(item.product._id, e.target.value);
                       }}
                     />
                   </div>
                   <div className="min-w-[100px]">
-                    &#8377;{(item.quantity * item.product.Price).toFixed(2)}
+                    &#8377;{(item.quantity * item.product.price).toFixed(2)}
                   </div>
                   <div className="min-w-[100px]">
                     <motion.button
-                      onClick={() => RemoveItem(item.product.ProductId)}
+                      onClick={() => RemoveItem(item.product._id)}
                       whileHover={{ scale: 1.1 }}
                       className="border"
                     >
@@ -96,7 +96,9 @@ const Cart = () => {
                     </motion.button>
                   </div>
                 </div>
-              ))
+              )
+              )
+
             ) : (
               <div className="py-5 text-center text-gray-600">
                 Your cart is empty. Start shopping now!
@@ -117,7 +119,7 @@ const Cart = () => {
                 &#8377;
                 {cart
                   .reduce(
-                    (sum, item) => sum + item.quantity * item.product.Price,
+                    (sum, item) => sum + item.quantity * item.product.price,
                     0,
                   )
                   .toFixed(2)}
@@ -136,7 +138,7 @@ const Cart = () => {
                 &#8377;
                 {(
                   cart.reduce(
-                    (sum, item) => sum + item.quantity * item.product.Price,
+                    (sum, item) => sum + item.quantity * item.product.price,
                     0,
                   ) + shippingCost
                 ).toFixed(2)}

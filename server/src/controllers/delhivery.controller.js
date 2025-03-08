@@ -657,6 +657,8 @@ const createCMUManifest = asyncHandler(async (req, res) => {
     }
 });
 
+
+
 export { checkPindcodeAvalibility , checkPincodeAvailability2 , createClientWarehouse ,  generateWaybill  ,
     createCMU , createPickupRequest , editWarehouse , trackPackage , cancelOrder , createReverseCMU , createCMUManifest
 };

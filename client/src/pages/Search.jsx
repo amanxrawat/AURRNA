@@ -19,7 +19,6 @@ const Search = () => {
 
   const productData = data?.data || [];
 
-  console.log("productData : ", productData);
 
   const [showFilter, setShowFilter] = useState(false);
   const [filterProducts, setFilterProducts] = useState([]);
@@ -29,6 +28,7 @@ const Search = () => {
   const [sortType, setSortType] = useState("relevent");
 
   const toggleCategory = (e) => {
+    console.log(e.target.value);
     if (category.includes(e.target.value)) {
       setCategory((prev) => prev.filter((item) => item !== e.target.value));
     } else {
@@ -50,42 +50,46 @@ const Search = () => {
     }
   };
 
-  const applyFilter = async () => {
+  const applyFilter = () => {
     let productsCopy = productData?.slice() || [];
-
+  
     if (productsCopy.length > 0) {
-      productsCopy = productsCopy.filter((item) => {
-        return item.name.toLowerCase().includes(search.toLowerCase());
-      });
+      productsCopy = productsCopy.filter((item) => 
+        item.name.toLowerCase().includes(search.toLowerCase())
+      );
     }
-  };
-
-  if (category.length > 0) {
-    productsCopy = productsCopy.filter((item) =>
-      category.includes(item.Gender),
-    );
-  }
-
-  if (material.length > 0) {
-    productsCopy = productsCopy.filter((item) =>
-      material.includes(item.material),
-    );
-  }
-  if (type.length > 0) {
-    productsCopy = productsCopy.filter((item) =>
-      type.includes(item.categories[0]),
-    );
+  
+    // if (category.length > 0) {
+    //   productsCopy = productsCopy.filter((item) =>
+    //     category.includes(item.gender)
+    //   );
+    // }
+  
+    if (material.length > 0) {
+      productsCopy = productsCopy.filter((item) =>
+        material.some(mat => item.material.includes(mat))
+      );
+    }
+  
+    if (type.length > 0) {
+      productsCopy = productsCopy.filter((item) =>
+        type.some(t => item.categories.some(cat => cat.includes(t)))
+      );
+    }
+  
+    // Ensure state is updated after filtering
     setFilterProducts(productsCopy);
-  }
+  };
+  
 
   const sortProduct = () => {
     let filterProductsCopy = filterProducts.slice();
     switch (sortType) {
       case "low-high":
-        setFilterProducts(filterProductsCopy.sort((a, b) => a.Price - b.Price));
+        setFilterProducts(filterProductsCopy.sort((a, b) => a.price - b.price));
         break;
       case "high-low":
-        setFilterProducts(filterProductsCopy.sort((a, b) => b.Price - a.Price));
+        setFilterProducts(filterProductsCopy.sort((a, b) => b.price - a.price));
         break;
       default:
         applyFilter();
@@ -95,6 +99,7 @@ const Search = () => {
 
   useEffect(() => {
     applyFilter();
+    console.log("type", type);
   }, [category, material, type, search]);
 
   useEffect(() => {
@@ -111,13 +116,13 @@ const Search = () => {
         <p className="my-2 flex cursor-pointer items-center gap-2 pl-1 font-Corm text-2xl uppercase">
           filter
         </p>
-        <div
+        {/* <div
           className={twMerge(
             "m-1 border py-3 pl-5",
             !showFilter ? "" : "hidden",
           )}
-        >
-          <p className="pb-2 font-Corm text-xl font-medium">Gender</p>
+        > */}
+          {/* <p className="pb-2 font-Corm text-xl font-medium">Gender</p>
           <div className="flex flex-col gap-2 text-sm text-dark">
             <p className="flex gap-2">
               <input
@@ -146,8 +151,8 @@ const Search = () => {
               />{" "}
               Child
             </p>
-          </div>
-        </div>
+          </div> */}
+        {/* </div> */}
         <div
           className={twMerge(
             "m-1 border py-3 pl-5",
@@ -215,6 +220,15 @@ const Search = () => {
               <input
                 className="w-3"
                 type="checkbox"
+                value={"Pendant"}
+                onChange={toggleType}
+              />{" "}
+              Pendant
+            </p>
+            <p className="flex gap-2">
+              <input
+                className="w-3"
+                type="checkbox"
                 value={"Chain"}
                 onChange={toggleType}
               />{" "}
@@ -252,15 +266,16 @@ const Search = () => {
             {filterProducts?.map((item, index) => (
               <Card
                 key={index}
-                Name={item.name}
-                Images={item.images[0]}
-                Gender={"Something"}
-                Material={item.material}
-                Category={item.categories[0]}
-                Price={item.price}
-                ProductId={item._id}
-                Rating={item.ratings}
-                NoOfReviews={item.numReviews}
+                // Name={item.name}
+                // Images={item.images[0]}
+                // Gender={"Something"}
+                // Material={item.material}
+                // Category={item.categories[0]}
+                // Price={item.price}
+                // ProductId={item._id}
+                // Rating={item.ratings}
+                // NoOfReviews={item.numReviews}
+                product={item}
               />
             ))}
           </div>

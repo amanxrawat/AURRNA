@@ -1,8 +1,8 @@
-import { Cart } from "../models/cart.model";
-import { asyncHandler } from "../utils/asyncHandler";
-import { ApiError } from "../utils/ApiError";
-import { ApiResponse } from "../utils/ApiResponse";
-import { Product } from "../models/product.model";
+import { Cart } from "../models/cart.model.js";
+import { asyncHandler } from "../utils/asyncHandler.js";
+import { ApiError } from "../utils/ApiError.js";
+import { ApiResponse } from "../utils/ApiResponse.js";
+import { Product } from "../models/product.model.js";
 
 const addToCart = asyncHandler(async(req,res)=>{
     const user_Id = req.user._id;

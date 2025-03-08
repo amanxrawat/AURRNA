@@ -22,16 +22,7 @@ const Trending = ({ className, width, size = 3 }) => {
               index < size ? (
                 <Card
                   key={index}
-                  Name={item.name}
-                  Images={item.images[0]}
-                  Gender={"Female"}
-                  Material={item.material}
-                  Category={item.categories[0]}
-                  Price={item.price}
-                  ProductId={item._id}
-                  Rating={item.ratings}
-                  NoOfReviews={item.numReviews}
-
+                  product={item}
                 />
               ) : (
                 <div key={index}></div>

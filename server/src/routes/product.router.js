@@ -19,6 +19,6 @@ router.get("/:product_id", getSingleProduct);
 
 router.route("/:user_id/:product_id/review").post(productReview);
 router.route("/update").put(updateProduct);
-router.route("/delete").delete(deleteProduct);
+router.route("/:product_id").delete(deleteProduct);
 router.route("/check").get(check);
 export default router;

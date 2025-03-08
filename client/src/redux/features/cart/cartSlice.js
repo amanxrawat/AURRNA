@@ -1,5 +1,5 @@
-import { createSlice } from "@reduxjs/toolkit";
-import { productData } from "../../../constants/sampleData";
+import { createSlice} from "@reduxjs/toolkit";
+
 
 const cartSlice = createSlice({
 	name: "cart",
@@ -8,68 +8,62 @@ const cartSlice = createSlice({
 	},
 	reducers: {
 		addItem: (state, action) => {
-			const cartCopy = state.cart;
-			let notInCart = true;
+			const { product } = action.payload;
 
-			cartCopy.map((item) => {
-				if (item.product.ProductId === action.payload.ProductId) {
-					item.quantity = item.quantity + 1;
-					state = {
-						...state,
-						cart: cartCopy,
-					};
-					notInCart = false;
+			let updatedCart = JSON.parse(JSON.stringify(state.cart));
+			let itemExists = false;
+
+	
+			updatedCart.forEach((item) => {
+				if (item.product._id === product._id) {
+					item.quantity += 1;
+					itemExists = true;
 				}
-			});
+			})
 
-			if (notInCart) {
-				cartCopy.push({
-					product: action.payload,
+			if (!itemExists) {
+				updatedCart.push({
+					product: product,
 					quantity: 1,
 				});
-				state = {
-					...state,
-					cart: cartCopy,
-				};
 			}
+
+			// Update state correctly
+			state.cart = updatedCart;
 		},
-		addItemByProductId: (state, action) => {
-			const ProductId = action.payload;
-			let itemInCart = state.cart.find(item => item.product.ProductId === ProductId);
-		
-			if (itemInCart) {
-				// If the item already exists in the cart, increase its quantity
-				itemInCart.quantity += 1;
-			} else {
-				// If the item is not in the cart, find it in `productData` and add it
-				const product = productData.find(item => item.ProductId === ProductId);
-				if (product) {
-					state.cart.push({
-						product: product,
-						quantity: 1,
-					});
-				} else {
-					console.error(`Product with ID ${ProductId} not found.`);
-				}
-			}
-		},
-		
+
 		setItemQuantity: (state, action) => {
 			const { ProductId, quantity } = action.payload;
-		  
-			state.cart = state.cart.map((item) =>
-			  item.product.ProductId === ProductId
-				? { ...item, quantity }
-				: item
+
+			state.cart = state.cart.map((item) => {
+
+				console.log(item.product._id, ProductId);
+
+
+				return (
+					item.product._id === ProductId
+						? { ...item, quantity }
+						: item
+					)
+			}
+
 			);
 		},
+
 		removeItemByProductId: (state, action) => {
+
+			const {productId} = action.payload
+
 			state.cart = state.cart.filter(
-				(item) => item.product.ProductId !== action.payload.productId
+				(item) => item.product._id !== productId 
 			);
-		},		
+		},
 	},
+
 });
 
+
 export default cartSlice;
-export const { addItem,addItemByProductId, removeItemByProductId, setItemQuantity } = cartSlice.actions;
+export const { addItem, removeItemByProductId, setItemQuantity } = cartSlice.actions;
+
+

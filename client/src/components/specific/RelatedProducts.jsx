@@ -1,18 +1,42 @@
 import React, { useState, useEffect } from "react";
 
-import { productData } from "../../constants/sampleData";
 import Card from "./Card";
 import Trending from "./../specific/Trending";
+import { fetchProducts } from "../../api/api";
+
+
+
+
+
+
 
 const RelatedProducts = ({ type, gender, ProductId }) => {
   const [related, setRelated] = useState([]);
+  
+  const [productData, setProductData] = useState([]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const data = await fetchProducts(); // Ensure fetchProducts returns data
+        setProductData(data?.data); // Update state with fetched products
+      } catch (error) {
+        console.error("Error fetching products:", error);
+      }
+    };
+  
+    fetchData();
+  }, []);
+
+
+  console.log(productData);
 
   useEffect(() => {
     if (productData.length > 0) {
       let productCopy = productData.slice();
 
       productCopy = productCopy.filter(
-        (item) => type === item.Category && item.ProductId != ProductId,
+        (item) => (item.Category.includes(type) && item.ProductId !== ProductId)
       );
 
       setRelated(productCopy);
@@ -29,15 +53,7 @@ const RelatedProducts = ({ type, gender, ProductId }) => {
             return (
               <Card
                 key={index}
-                Name={item.Name}
-                Images={item.Images}
-                Gender={item.Gender}
-                Material={item.Material}
-                Category={item.Category}
-                Price={item.Price}
-                ProductId={item.ProductId}
-                Rating={item.Rating}
-                NumberOfReviews={item.NumberOfReviews}
+                product={item}
               />
             );
           })}

@@ -11,15 +11,15 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 const queryClient = new QueryClient();
 
 createRoot(document.getElementById("root")).render(
-  <StrictMode>
-    <Provider store={store}>
-      <QueryClientProvider client={queryClient}>
+  <QueryClientProvider client={queryClient}>
+    <StrictMode>
+      <Provider store={store}>
         <HelmetProvider>
           <div className="font-BeViet">
             <App />
           </div>
         </HelmetProvider>
-      </QueryClientProvider>
-    </Provider>
-  </StrictMode>,
+      </Provider>
+    </StrictMode>,
+  </QueryClientProvider>
 );

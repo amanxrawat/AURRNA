@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+import mongoose from "mongoose";
 const { Schema } = mongoose;
 
 const userSchema = new Schema({
@@ -8,6 +8,15 @@ const userSchema = new Schema({
         trim:true,
         lowercase:true,
     },
+
+    address:[
+        {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'Address',
+            default: ""
+        }
+    ],
+
     email: {
         type: String,
         required: true,

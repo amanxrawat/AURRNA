@@ -15,7 +15,6 @@ const navitems = [
 	{ itemname: "Browse", path: "/search" },
 	{ itemname: "Contact", path: "/contact" },
 	{ itemname: "About", path: "/about" },
-	// { itemname: "", path: " " },
 ];
 
 const containerVariants = {

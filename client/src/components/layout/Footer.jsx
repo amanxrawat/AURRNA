@@ -35,10 +35,12 @@ const Footer = ({ className }) => {
             <div className="md:my-3">
               <div className="uppercase font-bold">useful links</div>
               <ul className=" md:pl-5">
-                <li>Contact Us</li>
+                <li><Link to="/contact">Contact Us</Link></li>
                 <li>Terms of Use</li>
                 <li>Privacy Policy</li>
-                <li>FAQ</li>
+                <li>
+                  <Link to="/FAQ">FAQ</Link>
+                </li>
               </ul>
             </div>
           </div>
