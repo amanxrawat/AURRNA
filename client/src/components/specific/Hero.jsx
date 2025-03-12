@@ -12,7 +12,7 @@ const Hero = () => {
       <div className=" p-10 ">
         <div className="items-center md:flex">
           <div className="md:w-[478px] bg-white/30 rounded-lg backdrop-blur-lg px-10">
-            <h1 className="mt-6 bg-gradient-to-b from-black to-dark uppercase font-Corm bg-clip-text text-5xl font-bold tracking-tighter text-transparent md:text-7xl">
+            <h1 className="sm:mt-6 pt-6 bg-gradient-to-b from-black to-dark uppercase font-Corm bg-clip-text text-5xl font-bold tracking-tighter text-transparent md:text-7xl">
               aurrna
             </h1>
             <p className="mt-6 pb-8 text-xl tracking-tight text-[#010d3E]">

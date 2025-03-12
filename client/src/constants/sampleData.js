@@ -1,189 +1,9 @@
-const productData = [
-	{
-		Name: "Elegant Silver Bracelet",
-		Images: [
-			"https://images.pexels.com/photos/998521/pexels-photo-998521.jpeg?auto=compress&cs=tinysrgb&w=600",
-			"https://images.pexels.com/photos/168927/pexels-photo-168927.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
-			"https://images.pexels.com/photos/691046/pexels-photo-691046.jpeg?auto=compress&cs=tinysrgb&w=600",
-			"https://images.pexels.com/photos/1302307/pexels-photo-1302307.jpeg?auto=compress&cs=tinysrgb&w=600",
-		],
-		Gender: "Female",
-		Material: "Silver",
-		Category: "Bracelet",
-		Discount: 10,
-		Price: 1000,
-		ProductId: 1,
-		Rating: 4.6,
-		NumberOfReviews: 120,
-		Description: "A stunning silver bracelet with an elegant design, perfect for any occasion. Crafted with precision to add charm to your style."
-	},
-	{
-		Name: "Gold Plated Necklace",
-		Images: [
-			"https://images.pexels.com/photos/998521/pexels-photo-998521.jpeg?auto=compress&cs=tinysrgb&w=600",
-			"https://images.pexels.com/photos/168927/pexels-photo-168927.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
-			"https://images.pexels.com/photos/691046/pexels-photo-691046.jpeg?auto=compress&cs=tinysrgb&w=600",
-			"https://images.pexels.com/photos/1302307/pexels-photo-1302307.jpeg?auto=compress&cs=tinysrgb&w=600",
-		],
-		Gender: "Female",
-		Material: "Gold",
-		Category: "Necklace",
-		Discount: 10,
-		Price: 1000,
-		ProductId: 2,
-		Rating: 4.6,
-		NumberOfReviews: 120,
-		Description: "An exquisite gold-plated necklace designed to enhance your elegance and add a touch of sophistication to your look."
-	},
-	{
-		Name: "Children's Charm Bracelet",
-		Images: [
-			"https://images.pexels.com/photos/998521/pexels-photo-998521.jpeg?auto=compress&cs=tinysrgb&w=600",
-			"https://images.pexels.com/photos/168927/pexels-photo-168927.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
-			"https://images.pexels.com/photos/691046/pexels-photo-691046.jpeg?auto=compress&cs=tinysrgb&w=600",
-			"https://images.pexels.com/photos/1302307/pexels-photo-1302307.jpeg?auto=compress&cs=tinysrgb&w=600",
-		],
-		Gender: "Child",
-		Material: "Silver",
-		Category: "Bracelet",
-		Discount: 10,
-		Price: 1000,
-		ProductId: 3,
-		Rating: 4.6,
-		NumberOfReviews: 120,
-		Description: "A charming silver bracelet specially crafted for children, featuring a delightful design that kids will love."
-	},
-	{
-		Name: "Men's Classic Chain",
-		Images: [
-			"https://images.pexels.com/photos/998521/pexels-photo-998521.jpeg?auto=compress&cs=tinysrgb&w=600",
-			"https://images.pexels.com/photos/168927/pexels-photo-168927.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
-			"https://images.pexels.com/photos/691046/pexels-photo-691046.jpeg?auto=compress&cs=tinysrgb&w=600",
-			"https://images.pexels.com/photos/1302307/pexels-photo-1302307.jpeg?auto=compress&cs=tinysrgb&w=600",
-		],
-		Gender: "Male",
-		Material: "Gold",
-		Category: "Chain",
-		Discount: 10,
-		Price: 1000,
-		ProductId: 4,
-		Rating: 4.6,
-		NumberOfReviews: 120,
-		Description: "A classic gold chain for men, combining timeless design with modern craftsmanship to elevate your style."
-	},
-	{
-		Name: "Gold Collection Set",
-		Images: [
-			"https://images.pexels.com/photos/998521/pexels-photo-998521.jpeg?auto=compress&cs=tinysrgb&w=600",
-			"https://images.pexels.com/photos/168927/pexels-photo-168927.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
-			"https://images.pexels.com/photos/691046/pexels-photo-691046.jpeg?auto=compress&cs=tinysrgb&w=600",
-			"https://images.pexels.com/photos/1302307/pexels-photo-1302307.jpeg?auto=compress&cs=tinysrgb&w=600",
-		],
-		Gender: "Female",
-		Material: "Gold",
-		Category: "Collection",
-		Price: 1399,
-		ProductId: 5,
-		Rating: 4.6,
-		NumberOfReviews: 120,
-		Description: "A luxurious gold collection set featuring intricately designed pieces, perfect for adding a touch of opulence to your wardrobe."
-	},
-	{
-		Name: "Silver Cuff Bracelet",
-		Images: [
-			"https://images.pexels.com/photos/998521/pexels-photo-998521.jpeg?auto=compress&cs=tinysrgb&w=600",
-			"https://images.pexels.com/photos/168927/pexels-photo-168927.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
-			"https://images.pexels.com/photos/691046/pexels-photo-691046.jpeg?auto=compress&cs=tinysrgb&w=600",
-			"https://images.pexels.com/photos/1302307/pexels-photo-1302307.jpeg?auto=compress&cs=tinysrgb&w=600",
-		],
-		Gender: "Male",
-		Material: "Silver",
-		Category: "Bracelet",
-		Discount: 10,
-		Price: 1000,
-		ProductId: 6,
-		Rating: 4.6,
-		NumberOfReviews: 120,
-		Description: "A sleek silver cuff bracelet with a modern design, perfect for men who appreciate minimalist accessories."
-	},
-	{
-		Name: "Children's Beaded Necklace",
-		Images: [
-			"https://images.pexels.com/photos/998521/pexels-photo-998521.jpeg?auto=compress&cs=tinysrgb&w=600",
-			"https://images.pexels.com/photos/168927/pexels-photo-168927.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
-			"https://images.pexels.com/photos/691046/pexels-photo-691046.jpeg?auto=compress&cs=tinysrgb&w=600",
-			"https://images.pexels.com/photos/1302307/pexels-photo-1302307.jpeg?auto=compress&cs=tinysrgb&w=600",
-		],
-		Gender: "Child",
-		Material: "Silver",
-		Category: "Necklace",
-		Discount: 10,
-		Price: 1000,
-		ProductId: 7,
-		Rating: 4.6,
-		NumberOfReviews: 120,
-		Description: "A delightful beaded necklace for children, featuring vibrant designs and high-quality materials for durability."
-	},
-	{
-		Name: "Luxury Gold Chain",
-		Images: [
-			"https://images.pexels.com/photos/998521/pexels-photo-998521.jpeg?auto=compress&cs=tinysrgb&w=600",
-			"https://images.pexels.com/photos/168927/pexels-photo-168927.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
-			"https://images.pexels.com/photos/691046/pexels-photo-691046.jpeg?auto=compress&cs=tinysrgb&w=600",
-			"https://images.pexels.com/photos/1302307/pexels-photo-1302307.jpeg?auto=compress&cs=tinysrgb&w=600",
-		],
-		Gender: "Male",
-		Material: "Gold",
-		Category: "Chain",
-		Discount: 10,
-		Price: 1000,
-		ProductId: 8,
-		Rating: 4.6,
-		NumberOfReviews: 120,
-		Description: "A delightful beaded necklace for children, featuring vibrant designs and high-quality materials for durability."
-	},
-	{
-		Name: "Silver Pendant Necklace",
-		Images: [
-			"https://images.pexels.com/photos/998521/pexels-photo-998521.jpeg?auto=compress&cs=tinysrgb&w=600",
-			"https://images.pexels.com/photos/168927/pexels-photo-168927.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
-			"https://images.pexels.com/photos/691046/pexels-photo-691046.jpeg?auto=compress&cs=tinysrgb&w=600",
-			"https://images.pexels.com/photos/1302307/pexels-photo-1302307.jpeg?auto=compress&cs=tinysrgb&w=600",
-		],
-		Gender: "Female",
-		Material: "Silver",
-		Category: "Necklace",
-		Discount: 10,
-		Price: 1000,
-		ProductId: 9,
-		Rating: 4.6,
-		NumberOfReviews: 120,
-		Description: "A delightful beaded necklace for children, featuring vibrant designs and high-quality materials for durability."
-	},
-	{
-		Name: "Kids' Silver Bracelet",
-		Images: [
-			"https://images.pexels.com/photos/998521/pexels-photo-998521.jpeg?auto=compress&cs=tinysrgb&w=600",
-			"https://images.pexels.com/photos/168927/pexels-photo-168927.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
-			"https://images.pexels.com/photos/691046/pexels-photo-691046.jpeg?auto=compress&cs=tinysrgb&w=600",
-			"https://images.pexels.com/photos/1302307/pexels-photo-1302307.jpeg?auto=compress&cs=tinysrgb&w=600",
-		],
-		Gender: "Child",
-		Material: "Silver",
-		Category: "Bracelet",
-		Discount: 10,
-		Price: 1000,
-		ProductId: 10,
-		Rating: 4.6,
-		NumberOfReviews: 120,
-		Description: "A delightful beaded necklace for children, featuring vibrant designs and high-quality materials for durability."
-	},
-];
+
 
 const sampleUser = {
- Name : "Ankur Kumar",
- Email : "ankurkumar@gmail.com",
- Address : "H-87, Gali No. - 18, New Delhi",
+	Name: "Ankur Kumar",
+	Email: "ankurkumar@gmail.com",
+	Address: "H-87, Gali No. - 18, New Delhi",
 };
 
 
@@ -197,7 +17,7 @@ const Orders = [
 			"https://images.pexels.com/photos/1302307/pexels-photo-1302307.jpeg?auto=compress&cs=tinysrgb&w=600",
 		],
 		Description: "A delightful beaded necklace for children, featuring vibrant designs and high-quality materials for durability.",
-		Rating : 4.6,
+		Rating: 4.6,
 		NumberOfReviews: 120,
 	},
 	{
@@ -209,10 +29,255 @@ const Orders = [
 			"https://images.pexels.com/photos/1302307/pexels-photo-1302307.jpeg?auto=compress&cs=tinysrgb&w=600",
 		],
 		Description: "A delightful beaded necklace for children, featuring vibrant designs and high-quality materials for durability.",
-		Rating : 4.6,
+		Rating: 4.6,
 		NumberOfReviews: 120,
 	},
 ]
 
+const OrderInformation =
+	[
+		{
+			"user": "65f2a4e5c9b3a26d5f6f8a1b",
+			"orderItems": [
+				{
+					"productId": "65f2a5b7e3c4a74d2e9c3d12",
+					"quantity": 2,
+					"price": 19.99
+				},
+				{
+					"productId": "65f2a5b7e3c4a74d2e9c3d13",
+					"quantity": 1,
+					"price": 49.99
+				}
+			],
+			"shippingAddress": {
+				"street": "123 Main Street",
+				"city": "New York",
+				"state": "NY",
+				"country": "USA",
+				"postalCode": "10001"
+			},
+			"paymentMethod": "Credit Card",
+			"paymentStatus": "paid",
+			"orderStatus": "shipped",
+			"totalPrice": 89.97,
+			"waybill": "WB1234567890",
+			"shippingLabel": "https://example.com/shipping-label-123.pdf",
+			"createdAt": "2025-03-12T10:30:00Z",
+			"updatedAt": "2025-03-12T12:00:00Z"
+		},
+		{
+			"user": "65f2a4e5c9b3a26d5f6f8a1b",
+			"orderItems": [
+				{
+					"productId": "65f2a5b7e3c4a74d2e9c3d12",
+					"quantity": 2,
+					"price": 19.99
+				},
+				{
+					"productId": "65f2a5b7e3c4a74d2e9c3d13",
+					"quantity": 1,
+					"price": 49.99
+				}
+			],
+			"shippingAddress": {
+				"street": "123 Main Street",
+				"city": "New York",
+				"state": "NY",
+				"country": "USA",
+				"postalCode": "10001"
+			},
+			"paymentMethod": "Credit Card",
+			"paymentStatus": "paid",
+			"orderStatus": "shipped",
+			"totalPrice": 89.97,
+			"waybill": "WB1234567890",
+			"shippingLabel": "https://example.com/shipping-label-123.pdf",
+			"createdAt": "2025-03-12T10:30:00Z",
+			"updatedAt": "2025-03-12T12:00:00Z"
+		},
+		{
+			"user": "65f2a4e5c9b3a26d5f6f8a1b",
+			"orderItems": [
+				{
+					"productId": "65f2a5b7e3c4a74d2e9c3d12",
+					"quantity": 2,
+					"price": 19.99
+				},
+				{
+					"productId": "65f2a5b7e3c4a74d2e9c3d13",
+					"quantity": 1,
+					"price": 49.99
+				}
+			],
+			"shippingAddress": {
+				"street": "123 Main Street",
+				"city": "New York",
+				"state": "NY",
+				"country": "USA",
+				"postalCode": "10001"
+			},
+			"paymentMethod": "Credit Card",
+			"paymentStatus": "paid",
+			"orderStatus": "shipped",
+			"totalPrice": 89.97,
+			"waybill": "WB1234567890",
+			"shippingLabel": "https://example.com/shipping-label-123.pdf",
+			"createdAt": "2025-03-12T10:30:00Z",
+			"updatedAt": "2025-03-12T12:00:00Z"
+		},
+		{
+			"user": "65f2a4e5c9b3a26d5f6f8a1b",
+			"orderItems": [
+				{
+					"productId": "65f2a5b7e3c4a74d2e9c3d12",
+					"quantity": 2,
+					"price": 19.99
+				},
+				{
+					"productId": "65f2a5b7e3c4a74d2e9c3d13",
+					"quantity": 1,
+					"price": 49.99
+				}
+			],
+			"shippingAddress": {
+				"street": "123 Main Street",
+				"city": "New York",
+				"state": "NY",
+				"country": "USA",
+				"postalCode": "10001"
+			},
+			"paymentMethod": "Credit Card",
+			"paymentStatus": "paid",
+			"orderStatus": "shipped",
+			"totalPrice": 89.97,
+			"waybill": "WB1234567890",
+			"shippingLabel": "https://example.com/shipping-label-123.pdf",
+			"createdAt": "2025-03-12T10:30:00Z",
+			"updatedAt": "2025-03-12T12:00:00Z"
+		},
+		{
+			"user": "65f2a4e5c9b3a26d5f6f8a1b",
+			"orderItems": [
+				{
+					"productId": "65f2a5b7e3c4a74d2e9c3d12",
+					"quantity": 2,
+					"price": 19.99
+				},
+				{
+					"productId": "65f2a5b7e3c4a74d2e9c3d13",
+					"quantity": 1,
+					"price": 49.99
+				}
+			],
+			"shippingAddress": {
+				"street": "123 Main Street",
+				"city": "New York",
+				"state": "NY",
+				"country": "USA",
+				"postalCode": "10001"
+			},
+			"paymentMethod": "Credit Card",
+			"paymentStatus": "paid",
+			"orderStatus": "shipped",
+			"totalPrice": 89.97,
+			"waybill": "WB1234567890",
+			"shippingLabel": "https://example.com/shipping-label-123.pdf",
+			"createdAt": "2025-03-12T10:30:00Z",
+			"updatedAt": "2025-03-12T12:00:00Z"
+		},
+	]
 
-export { productData,sampleUser,Orders};
+const users = [
+	{
+		"_id": "65f123456789abcdef012345",
+		"fullName": "john doe",
+		"address": ["123 Elm Street,Springfield,Illinois,USA", "456 Maple Avenue,Brooklyn,New York,USA"],
+		"email": "johndoe@example.com",
+		"password": "$2b$10$abcdefg1234567890hashedpassword",
+		"role": "customer",
+		"orders": ["65f323456789abcdef012348"],
+		"coupons": ["DISCOUNT10", "FREESHIP"],
+		"createdAt": "2025-03-13T12:00:00.000Z",
+		"updatedAt": "2025-03-13T12:00:00.000Z"
+	},
+	{
+		"_id": "65f123456789abcdef012346",
+		"fullName": "jane smith",
+		"address": ["789 Oak Lane, Los Angeles, USA"],
+		"email": "janesmith@example.com",
+		"password": "$2b$10$hijklmnop1234567890hashedpassword",
+		"role": "admin",
+		"orders": ["65f323456789abcdef012349", "65f323456789abcdef012350"],
+		"coupons": [],
+		"createdAt": "2025-03-13T12:10:00.000Z",
+		"updatedAt": "2025-03-13T12:15:00.000Z"
+	}
+]
+
+const products = [
+	{
+		"_id": "67aa5eb4e11b23e2e2ed3296",
+		"name": "Emerald Green Necklace Set",
+		"shortDescription": "Elegant silver and green diamond necklace set, studded with premium American diamonds.",
+		"description": "This is our Emerald Green Necklace Set, made up of premium quality brass studded with silver and green American Diamonds, perfect for occasional wearing. Durable and Premium Quality Guaranteed.",
+		"price": 1000,
+		"categories": [
+			"Necklace Set"
+		],
+		"tags": [
+			"\"Silver\"",
+			" \"Green Diamond\"",
+			" \"American Diamonds\"",
+			" \"Occasional Wear\"",
+			" \"Premium Quality\""
+		],
+		"stock": 1,
+		"images": [
+			"https://res.cloudinary.com/dhhvmkyjz/image/upload/v1739218611/products/lwarvtmurllhuullyqcm.jpg",
+			"https://res.cloudinary.com/dhhvmkyjz/image/upload/v1739218611/products/fdy54c1onvjljmkgw8fk.jpg",
+			"https://res.cloudinary.com/dhhvmkyjz/image/upload/v1739218611/products/lwulsu8yzurda4nfoo6y.jpg",
+			"https://res.cloudinary.com/dhhvmkyjz/image/upload/v1739218611/products/kyszgxvnksawzwtrk3ew.jpg"
+		],
+		"ratings": 0,
+		"material": "Brass and American Diamonds",
+		"size": "OS (One Size)",
+		"color": "Silver with Green Diamond",
+		"numReviews": 0,
+		"createdAt": "2025-02-10T20:16:52.585Z",
+		"__v": 0
+	},
+	{
+		"_id": "67aa5eb4e11b23e2e2ed3296",
+		"name": "Emerald Green Necklace Set",
+		"shortDescription": "Elegant silver and green diamond necklace set, studded with premium American diamonds.",
+		"description": "This is our Emerald Green Necklace Set, made up of premium quality brass studded with silver and green American Diamonds, perfect for occasional wearing. Durable and Premium Quality Guaranteed.",
+		"price": 1000,
+		"categories": [
+			"Necklace Set"
+		],
+		"tags": [
+			"\"Silver\"",
+			" \"Green Diamond\"",
+			" \"American Diamonds\"",
+			" \"Occasional Wear\"",
+			" \"Premium Quality\""
+		],
+		"stock": 1,
+		"images": [
+			"https://res.cloudinary.com/dhhvmkyjz/image/upload/v1739218611/products/lwarvtmurllhuullyqcm.jpg",
+			"https://res.cloudinary.com/dhhvmkyjz/image/upload/v1739218611/products/fdy54c1onvjljmkgw8fk.jpg",
+			"https://res.cloudinary.com/dhhvmkyjz/image/upload/v1739218611/products/lwulsu8yzurda4nfoo6y.jpg",
+			"https://res.cloudinary.com/dhhvmkyjz/image/upload/v1739218611/products/kyszgxvnksawzwtrk3ew.jpg"
+		],
+		"ratings": 0,
+		"material": "Brass and American Diamonds",
+		"size": "OS (One Size)",
+		"color": "Silver with Green Diamond",
+		"numReviews": 0,
+		"createdAt": "2025-02-10T20:16:52.585Z",
+		"__v": 0
+	}
+]
+
+export { OrderInformation,products, users, sampleUser, Orders };

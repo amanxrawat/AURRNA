@@ -20,6 +20,6 @@ createRoot(document.getElementById("root")).render(
           </div>
         </HelmetProvider>
       </Provider>
-    </StrictMode>,
+    </StrictMode>
   </QueryClientProvider>
 );

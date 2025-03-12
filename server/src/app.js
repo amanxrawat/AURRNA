@@ -35,4 +35,20 @@ app.use("/api/review", reviewRouter);
 import cartRouter from "./routes/cart.router.js";
 app.use("/api/cart", cartRouter);
 
+// address routing 
+import addressRouter from "./routes/address.router.js";
+app.use("/api/address",addressRouter);
+
+// coupon routes
+import couponRouter from "./routes/coupon.router.js"
+app.use("/api/coupon",couponRouter);
+
+
+import orderRouter from "./routes/order.router.js"
+app.use("/api/order",orderRouter);
+
+
+
+
+
 export { app };

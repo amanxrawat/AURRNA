@@ -15,93 +15,99 @@ const instagramLink = "https://www.google.com/";
 
 const Footer = ({ className }) => {
   return (
-    <div
-      className={twMerge(
-        "bg-orange overflow-hidden bordet-t border-dark flex flex-col ",
-        className,
-      )}
-    >
-      <div className="bg-orange border-t border-dark">
-        <div className="flex md:flex-row flex-row flex-wrap sm:flex-row sm:justify-between  justify-center  lg:px-20 px-5 py-5 text-dark">
+    <footer className={twMerge("bg-orange border-t border-dark py-8", className)}>
+      {/* Grid Layout for Footer Sections */}
+      <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-4 gap-6 md:gap-10">
+        
+        {/* Online Shopping & Useful Links (Side by Side on Small Screens) */}
+        <div className="grid grid-cols-2 md:grid-cols-1 gap-6">
+          {/* Online Shopping */}
           <div>
-            <div className="hidden md:block">
-              <div className="font-bold uppercase">online shopping</div>
-              <ul className="pl-5 flex flex-col gap-1">
-                <Link to={"/search"}>Men</Link>
-                <Link to={"/search"}>Women</Link>
-                <Link to={"/search"}>Kids</Link>
-              </ul>
-            </div>
-            <div className="md:my-3">
-              <div className="uppercase font-bold">useful links</div>
-              <ul className=" md:pl-5">
-                <li><Link to="/contact">Contact Us</Link></li>
-                <li>Terms of Use</li>
-                <li>Privacy Policy</li>
-                <li>
-                  <Link to="/FAQ">FAQ</Link>
-                </li>
-              </ul>
-            </div>
+            <h3 className="text-lg font-bold uppercase">Online Shopping</h3>
+            <ul className="mt-3 space-y-2">
+              <li><Link to="/search">Men</Link></li>
+              <li><Link to="/search">Women</Link></li>
+              <li><Link to="/search">Kids</Link></li>
+            </ul>
           </div>
-          <div className="font-bold mx-8">
-            <div>
-              <div className="uppercase">keep in touch</div>
-              <div className=" flex lg:flex-row flex-wrap flex-row gap-3 w-[80%] p-2 lg:w-[100%]">
-                <a href={facebookLink} target="blank">
-                  <FacebookIcon className="scale-125" />
-                </a>
-                <a href={twitterLink} target="blank">
-                  <TwitterIcon className="scale-125" />
-                </a>
-                <a href={youtubeLink} target="blank">
-                  <YoutubeIcon className="scale-125" />
-                </a>
-                <a href={instagramLink} target="blank">
-                  <InstagramIcon className="scale-125" />
-                </a>
+
+          {/* Useful Links */}
+          <div>
+            <h3 className="text-lg font-bold uppercase">Useful Links</h3>
+            <ul className="mt-3 space-y-2">
+              <li><Link to="/contact">Contact Us</Link></li>
+              <li>Terms of Use</li>
+              <li>Privacy Policy</li>
+              <li><Link to="/FAQ">FAQ</Link></li>
+            </ul>
+          </div>
+        </div>
+
+        {/* Our Promise & Keep in Touch (Side by Side on Small Screens) */}
+        <div className="grid grid-cols-2 md:grid-cols-1 gap-6">
+          {/* Our Promise Section */}
+          <div>
+            <h3 className="text-lg font-bold uppercase">Our Promise</h3>
+            <div className="mt-4 space-y-4">
+              <div>
+                <h4 className="font-semibold">100% Original Guarantee</h4>
+                <p className="text-sm text-gray-700">For all products</p>
+              </div>
+              <div>
+                <h4 className="font-semibold">30 Days Return Policy</h4>
+                <p className="text-sm text-gray-700">Return within 2-3 working days</p>
               </div>
             </div>
           </div>
-          <div className="flex flex-col gap-5">
-            <div>
-              <div className="font-bold uppercase">100% original gurantee</div>
-              <div>For all products</div>
-            </div>
-            <div>
-              <div className="font-bold uppercase">30 days return policy</div>
-              <div>Return within 2-3 working days</div>
-            </div>
-          </div>
-          <div className="p-2">
-            <div className="font-bold uppercase">Join Us</div>
-            <div className="uppercase text-black opacity-50 my-2">
-              subscribe to our newsletters
-            </div>
-            <input
-              type="email"
-              className="fill-orange bg-orange placeholder-dark w-full p-2 outline-none border border-dark my-2"
-              placeholder="Email Address"
-            />
-            <button className="uppercase bg-dark text-[#FFFFFF] w-full p-2 ">
-              subscribe
-            </button>
-          </div>
-        </div>
-      </div>
-      <div className="bg-orange">
-        <div className="border-t border-dark lg:mx-20 mx-5 p-5 flex flex-row justify-between">
+
+          {/* Keep in Touch Section */}
           <div>
-            <span>In Case Of Any Concern,</span>
-            <Link to="/contact" className="font-bold text-dark">
-              {" "}
-              Contact Us{" "}
-            </Link>
+            <h3 className="text-lg font-bold uppercase">Keep in Touch</h3>
+            <div className="flex space-x-4 mt-4">
+              <a href={facebookLink} target="_blank" rel="noopener noreferrer">
+                <FacebookIcon className="text-xl hover:scale-110 transition" />
+              </a>
+              <a href={twitterLink} target="_blank" rel="noopener noreferrer">
+                <TwitterIcon className="text-xl hover:scale-110 transition" />
+              </a>
+              <a href={youtubeLink} target="_blank" rel="noopener noreferrer">
+                <YoutubeIcon className="text-xl hover:scale-110 transition" />
+              </a>
+              <a href={instagramLink} target="_blank" rel="noopener noreferrer">
+                <InstagramIcon className="text-xl hover:scale-110 transition" />
+              </a>
+            </div>
           </div>
-          <div>&copy; 2024 All Rights Reserved</div>
+        </div>
+
+        {/* Subscription Section */}
+        <div>
+          <h3 className="text-lg font-bold uppercase">Join Us</h3>
+          <p className="text-sm text-gray-700 mt-2">Subscribe to our newsletter</p>
+          <input
+            type="email"
+            className="mt-3 w-full p-2 border border-dark bg-orange placeholder-dark outline-none rounded-md"
+            placeholder="Email Address"
+          />
+          <button className="mt-3 w-full p-2 bg-dark text-white uppercase rounded-md hover:opacity-90 transition">
+            Subscribe
+          </button>
         </div>
       </div>
-    </div>
+
+      {/* Footer Bottom Section */}
+      <div className="border-t border-dark mt-8 py-4">
+        <div className="max-w-7xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center text-sm">
+          <p>
+            In case of any concern, 
+            <Link to="/contact" className="font-bold text-dark ml-1">
+              Contact Us
+            </Link>
+          </p>
+          <p>&copy; 2024 All Rights Reserved</p>
+        </div>
+      </div>
+    </footer>
   );
 };
 

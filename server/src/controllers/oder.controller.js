@@ -1,8 +1,8 @@
-import asyncHandler from 'express-async-handler';
-import { Order } from '../models/Order.js';
-import { Product } from '../models/Product.js';
-import ApiResponse from '../utils/ApiResponse.js';
-import ApiError from '../utils/ApiError.js';
+import {asyncHandler} from "../utils/asyncHandler.js";
+import { Order } from '../models/order.model.js';
+import { Product } from '../models/product.model.js';
+import {ApiResponse} from '../utils/ApiResponse.js';
+import {ApiError} from '../utils/ApiError.js';
 import { isAdmin } from '../utils/isAdmin.js';
 import { User } from '../models/user.model.js';
 

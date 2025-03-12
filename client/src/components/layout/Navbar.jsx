@@ -71,14 +71,19 @@ const Navbar = () => {
 	};
 
 	return (
-		<div className="overflow-hidden sticky top-0 z-20">
+		<div className="overflow-hidden sticky top-0 z-20 bg-">
 			<div className="flex flex-col w-full bg-orange sticky overscroll-none">
-				<div className="bg-dark  font-viet p-2 text-orange justify-center text-center">
+				<div className="bg-dark  font-viet p-2 text-orange justify-center text-center" 
+				
+
+				
+				>
 					Get Exclusive Offers and Deals
 				</div>
 				<div className="bg-orange p-4 overflow-x-clip">
 					<div className="flex flex-row justify-between items-center text-center lg:px-12 sm:px-6">
 						<div
+							
 							className="text-center hidden sm:flex items-center gap-2 border rounded-full bg-orange px-2 border-purple"
 							onChange={(e) => {
 								handleSearch(e);
@@ -92,7 +97,7 @@ const Navbar = () => {
 								className="lg:w-72 md:w-48 sm:w-28 outline-none h-8 bg-orange rounded-md placeholder-black"
 							/>
 						</div>
-						<div className="items-center flex gap-2 lg:-translate-x-[88px] md:-translate-x-[40px]">
+						<div className="items-center flex gap-2 lg:-translate-x-[88px] md:-translate-x-[40px]" >
 							<img src="/Images/Logo.png" className="h-12" />
 							<span
 								className="text-3xl text-purple uppercase cursor-pointer font-Corm font-bold"
