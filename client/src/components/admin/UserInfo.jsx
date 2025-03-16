@@ -14,7 +14,7 @@ const TableHeader = () => (
 
 const TableRow = ({ user }) => (
   <tr key={user._id} className="bg-[#2f1055] transition duration-200">
-    <td className="px-4 py-2 border text-center whitespace-nowrap">{user.fullName || "N/A"}</td>
+    <td className="px-4 py-2 border text-centerborder-separate border-spacing-4 whitespace-nowrap">{user.fullName || "N/A"}</td>
     <td className="px-4 py-2 border text-center">{user.email || "N/A"}</td>
     <td className="px-4 py-2 border text-center capitalize">{user.role || "customer"}</td>
     <td className="px-4 py-2 border text-center">
@@ -32,12 +32,12 @@ const TableRow = ({ user }) => (
 const UserInfo = () => {
   return (
     <AdminLayout>
-      <div className="bg-dark min-h-screen text-white">
+      <div className="bg-gray-800 min-h-screen text-white">
         <h2 className="uppercase text-3xl text-center py-6 font-bold">User Information</h2>
 
         <div className="container mx-auto p-4">
           <div className="overflow-x-auto bg-gray-800 shadow-lg ">
-            <table className="min-w-full border border-gray-600">
+            <table className="min-w-full ">
               <TableHeader />
               <tbody className="text-gray-300">
                 {users.length ? users.map((user) => <TableRow key={user._id} user={user} />) : (

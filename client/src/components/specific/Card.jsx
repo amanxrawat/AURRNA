@@ -26,6 +26,7 @@ const Card = ({ product }) => {
             <img
               className="mx-auto h-full w-full object-cover rounded-lg"
               src={product.images[0]}
+              loading="lazy"
               alt="Jewelry Image"
               onClick={() => {
                 window.scrollTo({ top: 0, behavior: "smooth" });

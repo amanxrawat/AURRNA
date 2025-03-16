@@ -4,19 +4,35 @@ import { ApiResponse } from "../utils/ApiResponse.js";
 import { asyncHandler } from "../utils/asyncHandler.js";
 import { isAdmin } from "../utils/isAdmin.js";
 
-const generateAccessToken = asyncHandler(async (user_id) => {
+// const generateAccessTokens = (async (user_id) => {
+//     try {
+//         const user = User.findById(user_id);
+//         const accessToken = user.generateAccessToken();
+
+//         return { accessToken };
+//     } catch (error) {
+//         throw new ApiError(
+//             500,
+//             "something went wrong while creating  access token  for the user .",
+//         );
+//     }
+// });
+const generateAccessTokens = async (user_id) => {
     try {
-        const user = User.findById(user_id);
-        const accessToken = user.generateAccessToken();
+        const user = await User.findById(user_id);
+
+        if (!user) {
+            throw new ApiError(404, "User not found");
+        }
+
+        const accessToken = user.generateAccessToken();  // Call instance method correctly
 
         return { accessToken };
     } catch (error) {
-        throw new ApiError(
-            500,
-            "something went wrong while creating  access token  for the user .",
-        );
+        throw new ApiError(500, "Something went wrong while creating access token for the user.");
     }
-});
+};
+
 
 const registerUser = asyncHandler(async (req, res) => {
     const { fullName, email, password } = req.body;
@@ -31,7 +47,7 @@ const registerUser = asyncHandler(async (req, res) => {
         throw new ApiError(409, "user with email or user name alread exits");
     }
 
-    const user = User.create({
+    const user =await  User.create({
         fullName,
         email,
         password,
@@ -40,7 +56,7 @@ const registerUser = asyncHandler(async (req, res) => {
     const createdUser = await User.findById(user._id).select("-password ");
 
     if (!createdUser) {
-        throw ApiError(500, "something went wrong while registering the user");
+        throw  new ApiError(500, "something went wrong while registering the user");
     }
 
     return res
@@ -48,7 +64,7 @@ const registerUser = asyncHandler(async (req, res) => {
         .json(new ApiResponse(200, createdUser, "user registerd Successfully"));
 });
 
-const loginUser = asyncHandler(async (req, res) => {
+const loginUser = asyncHandler(async (req, res ,next) => {
     const { email, password } = req.body;
 
     if ([email, password].some((field) => field === "")) {
@@ -65,7 +81,7 @@ const loginUser = asyncHandler(async (req, res) => {
         throw new ApiError(401, "invalid user credentials ");
     }
 
-    const { accessToken } = await generateAccessAndRefreshTokens(user._id);
+    const { accessToken } =  generateAccessTokens(user._id);
 
     const loggedInUser = await User.findById(user._id).select("-password");
     const options = {
@@ -160,5 +176,5 @@ export {
     logoutUser,
     getAllUsers,
     deleteUser,
-    generateAccessToken,
+    generateAccessTokens,
 };

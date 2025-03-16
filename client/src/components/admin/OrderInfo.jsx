@@ -5,7 +5,7 @@ import { OrderInformation } from "../../constants/sampleData";
 const OrderInfo = () => {
   return (
     <AdminLayout>
-      <div className="bg-dark min-h-screen px-4 py-6">
+      <div className="bg-gray-800 min-h-screen px-4 py-6">
         <h2 className="uppercase text-3xl text-center text-white py-6 font-bold">Orders</h2>
 
         <div className="overflow-x-auto">

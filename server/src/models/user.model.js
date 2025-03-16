@@ -1,4 +1,6 @@
 import mongoose from "mongoose";
+import bcrypt from "bcrypt";
+import jsonwebtoken from "jsonwebtoken";
 const { Schema } = mongoose;
 
 const userSchema = new Schema({
@@ -63,7 +65,7 @@ userSchema.methods.generateAccessToken = async function(){
         },
         process.env.ACCESS_TOKEN_SECRET,
         {
-            expiresIn:ACCESS_TOKEN_EXPIRY
+            expiresIn:process.env.ACCESS_TOKEN_EXPIRY
         }
     )
 } 
