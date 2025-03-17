@@ -11,7 +11,7 @@ const ReviewStars = ({ rating }) => {
     <div className="flex gap-1">
       {/* Full Stars */}
       {[...Array(fullStars)].map((_, index) => (
-        <FaStar key={`full-${index}`} fill="orange" className="text-yellow-400 w-5 h-5" />
+        <FaStar key={`full-${index}`} fill="orange" className="text-yellow-400 w-3 h-3 lg:h-5 lg:w-5" />
       ))}
 
       {/* Half Star (if applicable) */}

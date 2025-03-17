@@ -262,7 +262,7 @@ const Search = () => {
         </div>
         {filterProducts.length > 0 ? (
           <div>
-            <div className="grid grid-cols-1 gap-4 gap-y-6 py-4 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+            <div className="grid grid-cols-2 gap-2 gap-y-6 py-4 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-4">
             {filterProducts?.map((item, index) => (
               <Card
                 key={index}

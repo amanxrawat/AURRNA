@@ -70,25 +70,24 @@ const Carousel = () => {
             }}
           >
             {carouselImages.map((item, index) => (
-              <div className="border rounded-t-lg  h-[320px]" key={index}>
+              <div className="border rounded-t-lg lg:h-[320px]" key={index}>
                 <div className="overflow-hidden rounded-t-lg">
                   <Link
                     to={item.link}
                     onClick={() => {
                       dispatch(setSearch(item.text));
-                      
                     }}
                   >
                     <motion.img
                       whileHover={{ scale: 1.2 }}
                       src={item.image}
                       key={index}
-                      className="h-72 scale-150"
+                      className="lg:h-72 h-40 scale-150"
                     />
                   </Link>
                 </div>
                 <div>
-                  <h1 className="font-Corm text-center uppercase text-2xl">
+                  <h1 className="font-Corm text-center uppercase text-sm lg:text-2xl">
                   <Link to="/search">{item.text}</Link>
                   </h1>
                 </div>
@@ -96,7 +95,7 @@ const Carousel = () => {
             ))}
             {carouselImages.map((item, index) => (
               <div
-                className="border rounded-t-lg h-[320px]"
+                className="border rounded-t-lg lg:h-[320px]"
                 key={index}
                 onClick={() => {
                   dispatch(setSearch(item.text));
@@ -113,12 +112,12 @@ const Carousel = () => {
                       whileHover={{ scale: 1.2 }}
                       src={item.image}
                       key={index}
-                      className="h-72 scale-150"
+                      className="lg:h-72 h-40 scale-150"
                     />
                   </Link>
                 </div>
                 <div>
-                  <h1 className="font-Corm text-center uppercase text-2xl">
+                  <h1 className="font-Corm text-center uppercase text-sm lg:text-2xl">
                     <Link to="/search">{item.text}</Link>
                   </h1>
                 </div>

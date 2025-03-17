@@ -26,7 +26,7 @@ const initialReviews = [
 
 const StarBar = ({ StarNumber, widthPercentage }) => {
   return (
-    <div className="flex items-center mt-4" key={StarNumber}>
+    <div className="flex items-center mt-2">
       <p className="text-sm font-medium text-purple">{StarNumber} star</p>
       <div className="w-2/4 h-5 mx-4 bg-gray-200 rounded-sm">
         <div
@@ -34,13 +34,10 @@ const StarBar = ({ StarNumber, widthPercentage }) => {
           style={{ width: `${widthPercentage}%` }}
         ></div>
       </div>
-      <span className="text-sm font-medium text-gray-500 dark:text-gray-400">
-        {widthPercentage}%
-      </span>
+      <span className="text-sm font-medium text-gray-500">{widthPercentage}%</span>
     </div>
   );
 };
-
 
 export default function ReviewSection() {
   const [reviews, setReviews] = useState(initialReviews);
@@ -64,61 +61,68 @@ export default function ReviewSection() {
   };
 
   return (
-    <div className="p-6 grid grid-cols-3">
-      <div className="col-span-1">
-        <h2 className="mb-4 text-2xl font-bold">Customer Reviews</h2>
-        <div className="flex-row mb-1 items-center flex gap-2">
-          <span className="mr-2 text-4xl font-bold">
-            {averageRating.toFixed(1)}
-          </span>
-          <div className="flex">
-            {[1, 2, 3, 4, 5].map((star) => (
-              <span
-                key={star}
-                className={`text-2xl ${star <= Math.round(averageRating) ? "text-amber-500" : "text-gray-300"}`}
-              >
-                ★
-              </span>
+    <div className="p-6 container mx-auto">
+      {/* Responsive Grid Layout */}
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {/* Left Panel - Summary */}
+        <div className="lg:col-span-1">
+          <h2 className="mb-4 text-2xl font-bold">Customer Reviews</h2>
+          <div className="flex items-center gap-2 mb-2">
+            <span className="text-4xl font-bold">{averageRating.toFixed(1)}</span>
+            <div className="flex">
+              {[1, 2, 3, 4, 5].map((star) => (
+                <span
+                  key={star}
+                  className={`text-2xl ${
+                    star <= Math.round(averageRating) ? "text-amber-500" : "text-gray-300"
+                  }`}
+                >
+                  ★
+                </span>
+              ))}
+            </div>
+          </div>
+          <span className="text-gray-600">({reviews.length} reviews)</span>
+
+          <div className="mt-4">
+            {[5, 4, 3, 2, 1].map((star) => {
+              const starCount = reviews.filter((review) => review.rating === star).length;
+              const widthPercentage = ((starCount / reviews.length) * 100).toFixed(0);
+              return <StarBar key={star} StarNumber={star} widthPercentage={widthPercentage} />;
+            })}
+          </div>
+        </div>
+
+        {/* Middle Panel - Reviews */}
+        <div className="space-y-6 lg:col-span-1">
+          <div className="rounded-md border p-4 shadow-md bg-white">
+            <h3 className="mb-2 text-lg font-semibold">Recent Reviews</h3>
+            {reviews.map((review) => (
+              <div key={review.id} className="border-b py-2 last:border-b-0">
+                <div className="flex items-center">
+                  <span className="mr-2 font-semibold">{review.user}</span>
+                  <span className="text-xs text-gray-500">{review.date}</span>
+                  <div className="ml-auto flex">
+                    {[1, 2, 3, 4, 5].map((star) => (
+                      <span
+                        key={star}
+                        className={`text-sm ${
+                          star <= review.rating ? "text-amber-400" : "text-gray-300"
+                        }`}
+                      >
+                        ★
+                      </span>
+                    ))}
+                  </div>
+                </div>
+                <p className="text-sm text-gray-700">{review.comment}</p>
+              </div>
             ))}
           </div>
         </div>
-        <span className="ml-2 text-gray-600">({reviews.length} reviews)</span>
-        <div>
-          {
-            [5, 4, 3, 2, 1].map((star) => {
-              const starCount = reviews.filter(review => review.rating === star).length;
-              const widthPercentage = ((starCount / reviews.length) * 100).toFixed(0);
-              return StarBar({ StarNumber: star, widthPercentage });
-            })
-          }
-        </div>
-      </div>
 
-
-      <div className="space-y-6 col-span-2 max-x-5xl">
-        <div className="rounded-md border p-4 shadow-md">
-          <h3 className="mb-2 text-lg font-semibold">Recent Reviews</h3>
-          {reviews.map((review) => (
-            <div key={review.id} className="border-b py-2 last:border-b-0 ">
-              <div className="flex items-center">
-                <span className="mr-2 font-semibold">{review.user}</span>
-                <span className="text-sm text-gray-500">{review.date}</span>
-                <div className="ml-auto flex">
-                  {[1, 2, 3, 4, 5].map((star) => (
-                    <span
-                      key={star}
-                      className={`text-sm ${star <= review.rating ? "text-amber-400" : "text-gray-300"}`}
-                    >
-                      ★
-                    </span>
-                  ))}
-                </div>
-              </div>
-              <p className="text-sm text-gray-700">{review.comment}</p>
-            </div>
-          ))}
-        </div>
-        <div className="rounded-md border p-4 shadow-md">
+        {/* Right Panel - Review Form */}
+        <div className="rounded-md border p-4 shadow-md bg-white lg:col-span-1">
           <h3 className="mb-2 text-lg font-semibold">Write a Review</h3>
           <form onSubmit={handleSubmit} className="space-y-4">
             <div>
@@ -127,7 +131,9 @@ export default function ReviewSection() {
                 {[1, 2, 3, 4, 5].map((star) => (
                   <span
                     key={star}
-                    className={`cursor-pointer text-2xl ${star <= newReview.rating ? "text-amber-500" : "text-gray-300"}`}
+                    className={`cursor-pointer text-2xl ${
+                      star <= newReview.rating ? "text-amber-500" : "text-gray-300"
+                    }`}
                     onClick={() => setNewReview({ ...newReview, rating: star })}
                   >
                     ★
@@ -148,7 +154,7 @@ export default function ReviewSection() {
             </div>
             <button
               type="submit"
-              className="mt-2 rounded-md bg-blue-600 px-4 py-2 text-white hover:bg-blue-700"
+              className="w-full rounded-md bg-blue-600 px-4 py-2 text-white hover:bg-blue-700"
             >
               Submit Review
             </button>

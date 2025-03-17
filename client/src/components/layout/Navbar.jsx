@@ -100,7 +100,7 @@ const Navbar = () => {
 						<div className="items-center flex gap-2 lg:-translate-x-[88px] md:-translate-x-[40px]" >
 							<img src="/Images/Logo.png" className="h-12" />
 							<span
-								className="text-3xl text-purple uppercase cursor-pointer font-Corm font-bold"
+								className="text-xl md:text-3xl text-purple uppercase cursor-pointer font-Corm font-bold"
 								onClick={() => navigate("/")}
 							>
 								aurrna
@@ -153,7 +153,7 @@ const Navbar = () => {
 						<input
 							placeholder="Search"
 							defaultValue={search}
-							className="lg:w-72 md:w-48 sm:w-40 outline-none h-8 bg-orange rounded-md placeholder-black"
+							className="lg:w-72 md:w-48 w-32 outline-none h-8 bg-orange rounded-md placeholder-black"
 						/>
 					</div>
 					<div className="px-2">

@@ -4,8 +4,8 @@ import Card from "./Card";
 import { useQuery } from "@tanstack/react-query";
 import { fetchProducts } from "../../api/api";
 
-const Trending = ({ className, width, size = 4 }) => {
-  console.log(import.meta.env.VITE_EMAIL_KEY)
+const Trending = ({ className, width, size = 8 }) => {
+  // console.log(import.meta.env.VITE_EMAIL_KEY)
   const { data } = useQuery({
     queryKey: ["products"],
     queryFn: fetchProducts,
