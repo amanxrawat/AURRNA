@@ -49,7 +49,7 @@ const Card = ({ product }) => {
             onClick={() => {
               window.scrollTo({ top: 0, behavior: "smooth" });
             }}
-            className="text-md lg:text-xl font-semibold leading-tight text-gray-900 hover:underline"
+            className="text-[12px] leading-none lg:text-xl font-semibold text-gray-900 hover:underline"
           >
             {product.name}
           </Link>

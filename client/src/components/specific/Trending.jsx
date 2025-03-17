@@ -18,7 +18,7 @@ const Trending = ({ className, width, size = 8 }) => {
   <div className="flex flex-col items-center">
     <h1 className="p-8 text-center font-Corm text-5xl">Trending Now</h1>
     <div className="w-full px-4">
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+      <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
         {productData?.slice(0, size).map((item, index) => (
           <Card key={index} product={item} />
         ))}

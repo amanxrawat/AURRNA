@@ -43,8 +43,8 @@ const Product = () => {
     <div>
       <div className="opactiy-100 border-t-2 p-10 transition-opacity duration-500 ease-in">
         <div className="flex flex-col gap-12 sm:flex-row sm:gap-12">
-          <div className="fllex-col-reverse flex flex-1 gap-3 sm:flex-row">
-            <div className="no-scrollbar flex w-full justify-between gap-1 overflow-x-auto sm:w-[20%] sm:flex-col sm:justify-normal sm:overflow-y-scroll">
+          <div className="flex-col-reverse flex flex-1 gap-1 sm:flex-row">
+            <div className="lg:no-scrollbar flex w-20 justify-between gap-0 sm:w-20 sm:flex-col sm:justify-normal sm:overflow-y-scroll">
               {product?.images?.map((item, index) => {
                 return (
                   <img

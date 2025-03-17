@@ -111,7 +111,7 @@ const Search = () => {
   }, [productData]);
 
   return (
-    <div className="flex flex-col gap-1 border-t px-10 pt-10 sm:flex-row sm:gap-10">
+    <div className="flex flex-col gap-1 border-t px-4 lg:px-10 pt-10 sm:flex-row sm:gap-10">
       <div className="min-w-40 pb-10">
         <p className="my-2 flex cursor-pointer items-center gap-2 pl-1 font-Corm text-2xl uppercase">
           filter
@@ -262,7 +262,7 @@ const Search = () => {
         </div>
         {filterProducts.length > 0 ? (
           <div>
-            <div className="grid grid-cols-2 gap-2 gap-y-6 py-4 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-4">
+            <div className="grid grid-cols-2 gap-2 gap-y-2 md:gap-y-2 gap-x-2 mx-2 py-4 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-4">
             {filterProducts?.map((item, index) => (
               <Card
                 key={index}
