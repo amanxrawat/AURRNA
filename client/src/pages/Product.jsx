@@ -132,7 +132,7 @@ const Product = () => {
               <p>{product.description}</p>
             </div>
           ) : (
-            <div className="flex flex-col gap-4 border px-5 py-5 text-sm">
+            <div className="flex flex-col gap-4 border py-5 text-sm">
               <ReviewSection />
             </div>
           )}
